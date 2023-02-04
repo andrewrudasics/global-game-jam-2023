@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 public class DummyPlayerController : MonoBehaviour
 {
     private Vector2 inputMove;
+
+    // [Important] Set by PlayerManager so we can differentiate which player this is
     public int PlayerIndex = -1;
 
     void Update()
@@ -13,23 +15,22 @@ public class DummyPlayerController : MonoBehaviour
         transform.position += (new Vector3(inputMove.x, 0, inputMove.y)) * 0.1f;
     }
 
-    // Gameplay Actions
+    // [Important] Gameplay Actions
     void OnMove(InputValue value) {
         inputMove = value.Get<Vector2>();
     }
 
-    // Menu Actions
+    // [Important] Menu Actions
     void OnJoin() {
         PlayerManager.Instance.JoinPlayer(PlayerIndex);
     }
     void OnLeft() {
         GameMenu.Instance.OnLeft(PlayerIndex);
     }
-    void OnStart() {
-        GameMenu.Instance.OnStart(PlayerIndex);
-    }
-
     void OnRight() {
         GameMenu.Instance.OnRight(PlayerIndex);
+    }
+    void OnStart() {
+        GameMenu.Instance.OnStart(PlayerIndex);
     }
 }
