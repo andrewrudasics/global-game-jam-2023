@@ -36,8 +36,8 @@ public class PlayerManager : MonoBehaviour
     {
         // Add the prefabs to the scene so that we can start getting PlayerInput
         playerInputs[0] = PlayerInput.Instantiate(PlayerPrefab, controlScheme: "Player1", pairWithDevice: Keyboard.current);
-        playerInputs[0].gameObject.GetComponent<DummyPlayerController>().PlayerIndex = 0;
         playerInputs[1] = PlayerInput.Instantiate(PlayerPrefab, controlScheme: "Player2", pairWithDevice: Keyboard.current);
+        playerInputs[0].gameObject.GetComponent<DummyPlayerController>().PlayerIndex = 0;
         playerInputs[1].gameObject.GetComponent<DummyPlayerController>().PlayerIndex = 1;
         SwitchActionMaps("menu");
     }
