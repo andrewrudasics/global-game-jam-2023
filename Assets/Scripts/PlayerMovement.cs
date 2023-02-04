@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool isPlayerOne = true;
     public float moveSpeed = 5.0f;
+    public float knockbackForceMultiplier = 10.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -99,5 +100,19 @@ public class PlayerMovement : MonoBehaviour
         }
 
         return moveAxis;
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            GameObject other = collision.gameObject;
+            if (other.GetComponent<PlayerMovement>() != null)
+            {
+                Debug.Log("Colliding with player object");
+                Vector3 forceDirection = collision.GetContact(0).normal;
+                collision.gameObject.GetComponent<Rigidbody>().AddForce(-forceDirection * knockbackForceMultiplier, ForceMode.Impulse);
+            }
+        }
     }
 }
