@@ -4,26 +4,32 @@ using UnityEngine;
 
 public class TemporaryHealth : MonoBehaviour
 {
-    GameObject defenseCall;
-    public int tempHealth = 20;
 
+    public float temporaryHelthAmount= 20.0f;
+    public float temporaryHealthDuration = 10.0f;
 
-    public GameObject defenseBarier;
-    
+    private float health;
+    private float originalHealth;
+    private float startTime;
 
-    bool defense = false;
-    // In the event an action of defense is called, the current health increases by a factor of the temprary health
-    // currentHealth + tempHealth = newHealth;
+    private void Start(){
+        health = GetComponent<HealthBarScript>().health;
+        originalHealth = health;
+    }
 
-    // if(defense == true)
-    // {
-    //     int newHealth;
-    //     //newHealth = currentHealth + tempHealth;
-    // }
-    //create a function called defense for the charaacter
+    private void Update()
+    {
+        health = GetComponent<HealthBarScript>().health;
+        float timeElapsed = Time.time - startTime;
 
-    public void defenseCalling(){
-        //It checks the index of the respective player requesting defense
-        //adds the value of the newHealth to the player.
+        if(health < originalHealth && timeElapsed < temporaryHealthDuration)
+        {
+            health += temporaryHelthAmount * Time.deltaTime;
+            GetComponent<Health>().health = health;
+        }
+        else{
+            startTime = Time.time;
+            originalHealth = health;
+        }
     }
 }
