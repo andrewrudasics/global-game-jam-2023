@@ -94,14 +94,13 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 shootDirection = (crosshair.transform.position - transform.position).normalized;
 
-        Quaternion shootRotation = Quaternion.FromToRotation(Vector3.right, shootDirection);
+        // Quaternion shootRotation = Quaternion.FromToRotation(Vector3.right, shootDirection);
 
-        GameObject projectile = Instantiate(Projectile, (transform.position + new Vector3(0,1,0)), shootRotation);
-        projectile.GetComponent<Rigidbody>().velocity = shootDirection * ProjectileSpeed;
-        projectile.GetComponent<ProjectileAttack>().owningPlayer = PlayerIndex;
+        // GameObject projectile = Instantiate(Projectile, (transform.position + new Vector3(0,1,0)), shootRotation);
+        // projectile.GetComponent<Rigidbody>().velocity = shootDirection * ProjectileSpeed;
+        // projectile.GetComponent<ProjectileAttack>().owningPlayer = PlayerIndex;
 
-        Debug.Log("Shoot Pressed");
-
+        AbilityManager.Instance.PerformCircularAttack(PlayerIndex, mousePosProjected, 1.0f);
     }
 
     void OnAim(InputValue value)
