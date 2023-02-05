@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 7791028328415251333}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5012305748529044113}
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 45e3adcd1cb7d5a4db627d49e5355d93, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d4bee5cb69012ef459171f59d46b1e71, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 5012305748529044113}
   - component: {fileID: 913535391650360010}
   m_Layer: 0
-  m_Name: Throwing Knife
+  m_Name: Throwing Knife Yellow
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

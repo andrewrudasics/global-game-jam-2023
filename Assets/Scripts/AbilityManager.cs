@@ -8,7 +8,6 @@ public class AbilityManager : MonoBehaviour
 {
     private static AbilityManager _instance;
     public bool DebugCollision = true;
-    public GameObject ThrowingKnifePrefab;
     public GameObject AttacksContainer;
     public GameObject DebugEffectContainer;
     public GameObject DebugRectangularAttackEffectPrefab;

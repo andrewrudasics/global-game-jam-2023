@@ -47,6 +47,7 @@ public class SkillHUD : MonoBehaviour
                 for (int i = 0; i < abilityController.ProjectileCount; i++) {
                     GUILayout.Box(knifeSprite, knifeSpriteStyle);
                 }
+                GUILayout.Box("", knifeSpriteStyle);
                 GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
             // Skills

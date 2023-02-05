@@ -4,9 +4,9 @@ using UnityEngine;
 
 public abstract class AbilityControllerBase : MonoBehaviour
 {
-    public GameObject ThrowingKnifePrefab;
-    protected int MaxProjectiles = 3;
-    [HideInInspector]
+    public GameObject ThrowingKnifeP1Prefab;
+    public GameObject ThrowingKnifeP2Prefab;
+    public int MaxProjectiles = 3;
     public int ProjectileCount = 3;
     protected float ProjectileCooldownS = 1.0f;
     protected float projectileRecoveryTime; // Time until next projectile is ready
@@ -53,7 +53,12 @@ public abstract class AbilityControllerBase : MonoBehaviour
         // Attach Knife onto projectile
         Vector3 direction = new Vector3(aimDirection.x, 0, aimDirection.y);
         Quaternion shootRotation = Quaternion.FromToRotation(Vector3.right, direction);
-        GameObject knife = Instantiate(ThrowingKnifePrefab, attackObject.transform);
+        if (player.PlayerIndex == 0) {
+            GameObject knife = Instantiate(ThrowingKnifeP1Prefab, attackObject.transform);
+        } else if (player.PlayerIndex == 1) {
+            GameObject knife = Instantiate(ThrowingKnifeP2Prefab, attackObject.transform);
+        }
+        
         attackObject.transform.rotation = shootRotation;
     }
 
