@@ -13,19 +13,19 @@ public class TemporaryHealth : MonoBehaviour
     private float startTime;
 
     private void Start(){
-        health = GetComponent<HealthBarScript>().health;
+        health = GetComponent<HealthBarScript>().GetHealth();
         originalHealth = health;
     }
 
     private void Update()
     {
-        health = GetComponent<HealthBarScript>().health;
+        health = GetComponent<HealthBarScript>().GetHealth();
         float timeElapsed = Time.time - startTime;
 
         if(health < originalHealth && timeElapsed < temporaryHealthDuration)
         {
             health += temporaryHelthAmount * Time.deltaTime;
-            GetComponent<Health>().health = health;
+            GetComponent<HealthBarScript>().SetHealth((int)health);
         }
         else{
             startTime = Time.time;
