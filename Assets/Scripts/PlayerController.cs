@@ -114,8 +114,6 @@ public class PlayerController : MonoBehaviour
         Vector3 camRight = Vector3.Cross(camForward, mainCamera.transform.up.normalized).normalized;
 
         if (!IsRooted) {
-            Debug.Log("Is ROoted?");
-            Debug.Log(IsRooted);
             if (spriteRenderer != null) {
                 if (moveAxis.x < 0) {
                     spriteRenderer.flipX = false;
