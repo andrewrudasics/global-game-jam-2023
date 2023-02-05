@@ -14,11 +14,14 @@ public class GameMenu : MonoBehaviour
     public Texture2D quitTexture;
     public Texture2D creditsTexture;
     public Texture2D selectorTexture;
-    public Texture2D gameOverTexture;
+    public Texture2D p1WinTexture;
+    public Texture2D p2WinTexture;
     public Texture2D playagainTexture;
     public Texture2D charSelectTexture;
     public Texture2D potatoStatsTexture;
     public Texture2D carrotStatsTexture;
+    public Texture2D joinTexture;
+    public Texture2D startMatchPromptTexture;
     bool hasStarted = false;
 
     private int selectedStartMenuIndex = 0;
@@ -124,12 +127,12 @@ public class GameMenu : MonoBehaviour
             if (hasStarted) { return; }
             hasStarted = true;
             MatchCountdown = 3;
-            await Task.Delay(1000);
-            while (MatchCountdown > 0)
-            {
-                MatchCountdown -= 1;
-                await Task.Delay(1000);
-            }
+            await Task.Delay(500);
+            // while (MatchCountdown > 0)
+            // {
+            //     MatchCountdown -= 1;
+            //     await Task.Delay(1000);
+            // }
             GameStateManager.Instance.StartGame();
             MatchCountdown = -1;
             hasStarted = false;
@@ -207,69 +210,60 @@ public class GameMenu : MonoBehaviour
         int availableWidth = Screen.width - 2 * PADDING;
 
         // Textured Version
-        // GUIStyle bgStyle = new GUIStyle();
-        // bgStyle.imagePosition = ImagePosition.ImageOnly;
-        // bgStyle.fixedHeight = availableHeight;
-        // bgStyle.fixedWidth = bgStyle.fixedHeight / charSelectTexture.height * charSelectTexture.width;
-        // if (bgStyle.fixedWidth > availableWidth) {
-        //     bgStyle.fixedWidth = availableWidth;
-        //     bgStyle.fixedHeight = bgStyle.fixedWidth / charSelectTexture.width * charSelectTexture.height;
-        // }
+        GUIStyle bgStyle = new GUIStyle();
+        bgStyle.imagePosition = ImagePosition.ImageOnly;
+        bgStyle.fixedHeight = availableHeight;
+        bgStyle.fixedWidth = bgStyle.fixedHeight / charSelectTexture.height * charSelectTexture.width;
+        if (bgStyle.fixedWidth > availableWidth) {
+            bgStyle.fixedWidth = availableWidth;
+            bgStyle.fixedHeight = bgStyle.fixedWidth / charSelectTexture.width * charSelectTexture.height;
+        }
 
-        // GUIStyle statsStyle = new GUIStyle();
-        // statsStyle.imagePosition = ImagePosition.ImageOnly;
-        // statsStyle.fixedHeight = availableHeight * 0.575f;
-        // statsStyle.fixedWidth = statsStyle.fixedHeight / potatoStatsTexture.height * potatoStatsTexture.width;
+        GUIStyle statsStyle = new GUIStyle();
+        statsStyle.imagePosition = ImagePosition.ImageOnly;
+        statsStyle.fixedHeight = availableHeight * 0.575f;
+        statsStyle.fixedWidth = statsStyle.fixedHeight / potatoStatsTexture.height * potatoStatsTexture.width;
         
-        // Rect menuRect = new Rect (PADDING, PADDING, Screen.width - 2 * PADDING, availableHeight);
-        // GUILayout.BeginArea(menuRect);
-        // GUILayout.BeginHorizontal();
-        //     GUILayout.Space((availableWidth-bgStyle.fixedWidth) / 2); // Center the background
-        //     GUILayout.Box(charSelectTexture, bgStyle);
-        //     GUILayout.Space(-bgStyle.fixedWidth); // Go back to beginning of drawing the background
-        //     // Bunch of magic numbers...
-        //     GUILayout.BeginVertical();
-        //         GUILayout.Space(bgStyle.fixedHeight * 0.29f);
-        //         GUILayout.BeginHorizontal();
-        //             GUILayout.Space(0.145f * bgStyle.fixedWidth);
-        //             GUILayout.Box(potatoStatsTexture, statsStyle);
-        //             GUILayout.Space(0.425f * bgStyle.fixedWidth);
-        //             GUILayout.Box(carrotStatsTexture, statsStyle);
-        //         GUILayout.EndHorizontal();
-        //     GUILayout.EndVertical();
-        // GUILayout.EndHorizontal();
-        // GUILayout.EndArea();
-
-        Rect menuRect = new Rect (100, 100, Screen.width-200, Screen.height-200);
-        GUILayout.BeginArea(menuRect, UnityEditor.EditorStyles.helpBox);
-        GUILayout.BeginVertical();
-            GUILayout.BeginHorizontal();
-                GUILayout.FlexibleSpace();
-                GUILayout.Label("Character Select");
-                GUILayout.FlexibleSpace();
-            GUILayout.EndHorizontal();
-            GUILayout.BeginHorizontal();
-                GUILayout.BeginVertical();
+        Rect menuRect = new Rect (PADDING, PADDING, Screen.width - 2 * PADDING, availableHeight);
+        GUILayout.BeginArea(menuRect);
+        GUILayout.BeginHorizontal();
+            GUILayout.Space((availableWidth-bgStyle.fixedWidth) / 2); // Center the background
+            GUILayout.Box(charSelectTexture, bgStyle);
+            GUILayout.Space(-bgStyle.fixedWidth); // Go back to beginning of drawing the background
+            // Bunch of magic numbers...
+            GUILayout.BeginVertical();
+                GUILayout.Space(bgStyle.fixedHeight * 0.29f);
+                GUILayout.BeginHorizontal();
+                    GUILayout.Space(0.145f * bgStyle.fixedWidth);
+                    if (!PlayerManager.Instance.HasPlayerJoined(0)) {
+                        GUILayout.Box(joinTexture, statsStyle);
+                    } else if (selectedCharacter[0] == 0) {
+                        GUILayout.Box(potatoStatsTexture, statsStyle);
+                    } else {
+                        GUILayout.Box(carrotStatsTexture, statsStyle);
+                    }
+                    GUILayout.Space(0.425f * bgStyle.fixedWidth);
+                    if (!PlayerManager.Instance.HasPlayerJoined(1)) {
+                        GUILayout.Box(joinTexture, statsStyle);
+                    } else if (selectedCharacter[1] == 0) {
+                        GUILayout.Box(potatoStatsTexture, statsStyle);
+                    } else {
+                        GUILayout.Box(carrotStatsTexture, statsStyle);
+                    }
+                GUILayout.EndHorizontal();
+                if (PlayerManager.Instance.HasPlayerJoined(0) && PlayerManager.Instance.HasPlayerJoined(1)) {
+                    GUILayout.Space(bgStyle.fixedWidth * -0.075f);
                     GUILayout.BeginHorizontal();
                         GUILayout.FlexibleSpace();
-                        GUILayout.Label("Player 1", UnityEditor.EditorStyles.whiteLargeLabel);
+                        statsStyle.fixedHeight = availableHeight * 0.15f;
+                        statsStyle.fixedWidth = statsStyle.fixedHeight / startMatchPromptTexture.height * startMatchPromptTexture.width;
+                        GUILayout.Space(statsStyle.fixedWidth * -0.2f);
+                        GUILayout.Box(startMatchPromptTexture, statsStyle);
                         GUILayout.FlexibleSpace();
                     GUILayout.EndHorizontal();
-                    CharacterSelectorLayout(0);
-                GUILayout.EndVertical();
-                GUILayout.FlexibleSpace();
-                GUILayout.BeginVertical();
-                    GUILayout.BeginHorizontal();
-                        GUILayout.FlexibleSpace();
-                            GUILayout.Label("Player 2");
-                        GUILayout.FlexibleSpace();
-                    GUILayout.EndHorizontal();
-                    CharacterSelectorLayout(1);
-                GUILayout.EndVertical();
-            GUILayout.EndHorizontal();
-            GUILayout.FlexibleSpace();
-            MatchStartText();
-        GUILayout.EndVertical();
+                }
+            GUILayout.EndVertical();
+        GUILayout.EndHorizontal();
         GUILayout.EndArea();
     }
 
@@ -278,7 +272,7 @@ public class GameMenu : MonoBehaviour
         int availableWidth = Screen.width;
 
         float height = availableHeight / 2.0f; 
-        float width = height / gameOverTexture.height * gameOverTexture.width;
+        float width = height / p1WinTexture.height * p1WinTexture.width;
 
         GUIStyle bgStyle = new GUIStyle();
         bgStyle.imagePosition = ImagePosition.ImageOnly;
@@ -296,7 +290,11 @@ public class GameMenu : MonoBehaviour
             GUILayout.Space((availableWidth - width)/2.0f);
             GUILayout.BeginVertical();
                 GUILayout.FlexibleSpace();
-                GUILayout.Box(gameOverTexture, bgStyle);
+                if (GameStateManager.Instance.WinningPlayer == 0) {
+                    GUILayout.Box(p1WinTexture, bgStyle);
+                } else {
+                    GUILayout.Box(p2WinTexture, bgStyle);
+                }
                 GUILayout.Space(-bgStyle.fixedHeight * 0.65f);
                 GUILayout.BeginHorizontal();
                     GUILayout.Space((bgStyle.fixedWidth - btnStyle.fixedWidth)/2.0f);
@@ -318,26 +316,6 @@ public class GameMenu : MonoBehaviour
             GUILayout.EndVertical();
         GUILayout.EndHorizontal();
         GUILayout.EndArea();
-
-        // Rect menuRect = new Rect (100, 100, Screen.width-200, Screen.height-200);
-        // GUILayout.BeginArea(menuRect, UnityEditor.EditorStyles.helpBox);
-        // GUILayout.BeginVertical();
-        //     GUILayout.FlexibleSpace();
-        //     GUILayout.BeginHorizontal();
-        //         GUILayout.FlexibleSpace();
-        //         int winningPlayer = GameStateManager.Instance.WinningPlayer + 1;
-        //         GUILayout.Label("Player " + winningPlayer + " is the SOUP SURVIVOR!!");
-        //         GUILayout.FlexibleSpace();
-        //     GUILayout.EndHorizontal();
-        //     GUILayout.FlexibleSpace();
-        //     GUILayout.BeginHorizontal();
-        //         GUILayout.FlexibleSpace();
-        //         GUILayout.Label("Press [Enter] on keyboard or START on controller to play again");
-        //         GUILayout.FlexibleSpace();
-        //     GUILayout.EndHorizontal();
-        //     GUILayout.FlexibleSpace();
-        // GUILayout.EndVertical();
-        // GUILayout.EndArea();
     }
 
     void CharacterSelectorLayout(int playerIndex) {
