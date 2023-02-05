@@ -93,7 +93,7 @@ public class GameMenu : MonoBehaviour
         // containerStyle.normal.background = menuTexture;
         // containerStyle.margin=new RectOffset(11,22,33,44);
         
-        int menuWidth = 500;
+        // int menuWidth = 500;
         Rect menuRect = new Rect (100, 100, Screen.width-200, Screen.height-200);
         GUILayout.BeginArea(menuRect, UnityEditor.EditorStyles.helpBox);
         GUILayout.BeginVertical();

@@ -50,49 +50,62 @@ public class SkillHUD : MonoBehaviour
             // Skills
             GUILayout.BeginHorizontal(UnityEditor.EditorStyles.helpBox);
                 if (player.SelectedCharacter == 0) {
-                    GUILayoutPotatoAbilities();
+                    GUILayoutPotatoAbilities(player);
                 } else {
-                    GUILayoutCarrotAbilities();
+                    GUILayoutCarrotAbilities(player);
                 }
             GUILayout.EndHorizontal();
         GUILayout.EndVertical();
         GUILayout.EndArea();
     }
 
-    // AbilityController.UseAbility1 / UseAbility2
-    // Maps to PotatoAbilityController.UseAbility1 or CarrotAbilityController.UseAbility1
-    // AbilityController.GetABilityCooldown1 [returns 0-1 number]
-
-    void GUILayoutAbility(string text) {
+    void GUILayoutAbility(PlayerController player, string text, int abilityIndex) {
+        const int SIZE = 64;
+        const int MARGIN = 4;
         GUIStyle abilityStyle = new GUIStyle(GUI.skin.box);
-        abilityStyle.fixedHeight = 64;
-        abilityStyle.fixedWidth = 64;
+        abilityStyle.fixedHeight = SIZE;
+        abilityStyle.fixedWidth = SIZE;
         abilityStyle.normal.textColor = Color.white;
         abilityStyle.alignment = TextAnchor.MiddleCenter;
         GUILayout.Box(text, abilityStyle);
+        float cdPercent = player.GetAbilityController().GetAbilityCooledDownPercent(abilityIndex);
+        if (cdPercent < 1) {
+            float width = Mathf.Ceil(SIZE * cdPercent);
+            if (width > 4) {
+                GUILayout.Space(-SIZE - MARGIN);
+                GUILayout.BeginVertical();
+                    abilityStyle.fixedHeight = 6;
+                    abilityStyle.fixedWidth = width;
+                    abilityStyle.normal.background = Texture2D.whiteTexture;
+                    GUILayout.Space(SIZE - MARGIN);
+                    GUILayout.Box("", abilityStyle);
+                GUILayout.EndVertical();
+                GUILayout.Space(SIZE - width);
+            }
+        }
     }
 
-    void GUILayoutPotatoAbilities() {
+    void GUILayoutPotatoAbilities(PlayerController player) {
         GUILayout.FlexibleSpace();
-        GUILayoutAbility("Block");
+        GUILayoutAbility(player, "Block", 0);
         GUILayout.FlexibleSpace();
-        GUILayoutAbility("Slam");
+        GUILayoutAbility(player, "Slam", 1);
         GUILayout.FlexibleSpace();
-        GUILayoutAbility("Leap");
+        GUILayoutAbility(player, "Leap", 2);
         GUILayout.FlexibleSpace();
-        GUILayoutAbility("Pound");
+        GUILayoutAbility(player, "Pound", 3);
         GUILayout.FlexibleSpace();
     }
 
-    void GUILayoutCarrotAbilities() {
+    void GUILayoutCarrotAbilities(PlayerController player) {
         GUILayout.FlexibleSpace();
-        GUILayoutAbility("Dodge");
+        GUILayoutAbility(player, "Dodge", 0);
         GUILayout.FlexibleSpace();
-        GUILayoutAbility("Rain");
+        GUILayoutAbility(player, "Rain", 1);
         GUILayout.FlexibleSpace();
-        GUILayoutAbility("Spikes");
+        GUILayoutAbility(player, "Spikes", 2);
         GUILayout.FlexibleSpace();
-        GUILayoutAbility("Charge");
+        GUILayoutAbility(player, "Charge", 3);
         GUILayout.FlexibleSpace();
     }
 }

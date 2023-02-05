@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5494968175652045310
 Transform:
   m_ObjectHideFlags: 0
@@ -218,7 +218,7 @@ MonoBehaviour:
   moveSpeed: 5
   PlayerIndex: -1
   SelectedCharacter: -1
-  crosshair: {fileID: 3953877890884344302}
+  crosshair: {fileID: 2386276356258775379}
   Projectile: {fileID: 8417483731998377226, guid: 89197330ae62c5b4d87167d8f533626c, type: 3}
   ProjectileSpeed: 5
   ProjectileCount: 5
@@ -265,7 +265,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2211636255413343515, guid: ceaad0805af261b4484083aff2fea226, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4840408383149141208, guid: ceaad0805af261b4484083aff2fea226, type: 3}
       propertyPath: m_RootOrder
@@ -313,6 +313,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ceaad0805af261b4484083aff2fea226, type: 3}
+--- !u!1 &2386276356258775379 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2211636255413343515, guid: ceaad0805af261b4484083aff2fea226, type: 3}
+  m_PrefabInstance: {fileID: 4588199106119095368}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8971200146475006096 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4840408383149141208, guid: ceaad0805af261b4484083aff2fea226, type: 3}

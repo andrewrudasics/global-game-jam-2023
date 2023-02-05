@@ -48,13 +48,15 @@ public class PlayerManager : MonoBehaviour
 
         InputDevice device = button.device;
 
-        // Check for duplicate device IDs
-        foreach (int deviceId in deviceIds) {
-            if (deviceId == device.deviceId) {
-                return;
+        // Check for duplicate gamepads since they can't join twice
+        if (device is Gamepad) {
+            foreach (int deviceId in deviceIds) {
+                if (deviceId == device.deviceId) {
+                    return;
+                }
             }
         }
-        
+
         if (device is Gamepad) {
             if (button.name != "buttonSouth") {
                 return;

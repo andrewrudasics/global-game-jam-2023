@@ -12,6 +12,17 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5.0f;
     public int PlayerIndex = -1;
     public int SelectedCharacter = -1;
+    private bool _isBlocking = false;
+
+    public bool IsBlocking
+    {
+        get { return _isBlocking; }
+        set {
+            _isBlocking = value ;
+            IsRooted = value ;
+        }
+    }
+    public bool IsRooted { get; set; }
 
     private Vector2 moveAxis, lookAxis, mousePosScreenSpace, mousePosProjected;
     private Camera mainCamera;
@@ -51,20 +62,24 @@ public class PlayerController : MonoBehaviour
 
         // Crosshair Position
         if (Device is Gamepad) {
-            Vector2 offsetPosition = lookAxis.normalized * 1.5f;
+            Vector2 offsetPosition = lookAxis.normalized;
             crosshair.transform.position = transform.position + (new Vector3(offsetPosition.x, 0.01f, offsetPosition.y));
+            float angle = Mathf.Atan2(offsetPosition.x, offsetPosition.y) + Mathf.PI / 2.0f;
+            crosshair.transform.rotation = Quaternion.AngleAxis(angle / Mathf.PI * 180.0f, new Vector3(0, 1, 0));
         } else {
-            crosshair.transform.position = new Vector3(mousePosProjected.x, 0.01f, mousePosProjected.y);
+            Vector2 offsetPosition = (mousePosProjected - new Vector2(transform.position.x, transform.position.z)).normalized;
+            crosshair.transform.position = transform.position + (new Vector3(offsetPosition.x, 0.01f, offsetPosition.y));
+            float angle = Mathf.Atan2(offsetPosition.x, offsetPosition.y) + Mathf.PI / 2.0f;
+            crosshair.transform.rotation = Quaternion.AngleAxis(angle / Mathf.PI * 180.0f, new Vector3(0, 1, 0));
         }
         
 
-        SetCrosshairColor();
+        // SetCrosshairColor();
 
         // Player Movement
         Vector3 camDir = mainCamera.transform.forward;
         Vector3 camForward = new Vector3(camDir.x, 0, camDir.z).normalized;
         Vector3 camRight = Vector3.Cross(camForward, mainCamera.transform.up.normalized).normalized;
-
 
         if (spriteRenderer != null)
         {
@@ -78,21 +93,17 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        Vector3 moveDir = (-1.0f * camRight * moveAxis.x) + (camForward * moveAxis.y);
-
-        if (anim != null)
-        {
-            if (moveDir.magnitude > 0.001f)
-            {
-                anim.SetBool("moving", true);
+        if (!IsRooted) {
+            Vector3 moveDir = (-1.0f * camRight * moveAxis.x) + (camForward * moveAxis.y);
+            if (anim != null) {
+                if (moveDir.magnitude > 0.001f) {
+                    anim.SetBool("moving", true);
+                } else {
+                    anim.SetBool("moving", false);
+                }
             }
-            else
-            {
-                anim.SetBool("moving", false);
-            }
+            rb.MovePosition(transform.position + (moveDir * moveSpeed * Time.deltaTime));
         }
-
-        rb.MovePosition(transform.position + (moveDir * moveSpeed * Time.deltaTime));
     }
 
     // [Important] Gameplay Actions

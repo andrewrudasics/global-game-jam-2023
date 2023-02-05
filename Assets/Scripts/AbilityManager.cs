@@ -30,6 +30,10 @@ public class AbilityManager : MonoBehaviour
         }
     }
 
+    public void PerformProjectileAttack(int owningPlayer) {
+        
+    }
+
     public void PerformRangedAttack(int owningPlayer, Vector2 position2D, Vector2 direction2D) {
         Vector3 position = new Vector3(position2D.x, 0, position2D.y);
         Vector3 direction = new Vector3(direction2D.x, 0, direction2D.y);

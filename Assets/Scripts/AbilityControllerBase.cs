@@ -4,21 +4,30 @@ using UnityEngine;
 
 public abstract class AbilityControllerBase : MonoBehaviour
 {
-    private int MaxProjectiles = 5;
+    protected int MaxProjectiles = 5;
     [HideInInspector]
     public int ProjectileCount = 5;
-    private float ProjectileCooldownS = 1.0f;
-    private float projectileRecoveryTime;
+    protected float ProjectileCooldownS = 1.0f;
+    protected float projectileRecoveryTime; // Time until next projectile is ready
+    protected float[] abilityCooldownsS = new float[4];
+    protected float[] abilityRecoveryTimes = new float[4]; // 0 means it's ready to use
 
     protected virtual PlayerController GetPlayerController() {
         return this.GetComponentInParent<PlayerController>();
+    }
+
+    protected virtual Animator GetAnimator() {
+        return this.GetComponent<Animator>();
     }
 
     public abstract void UseAbility1();
     public abstract void UseAbility2();
     public abstract void UseAbility3();
     public abstract void UseAbility4();
-    public abstract float GetAbilityCooldown(int abilityIndex);
+    // Returns a number [0-1] where 0 means it just went on cooldown, and 1 means it's off of cooldown
+    public virtual float GetAbilityCooledDownPercent(int abilityIndex) {
+        return (1 - abilityRecoveryTimes[abilityIndex] / abilityCooldownsS[abilityIndex]);
+    }
     public virtual void AttackMelee() { 
         PlayerController player = GetPlayerController();
         Vector2 cursorPosProjected = player.GetProjectedCursorPosition();
@@ -40,7 +49,17 @@ public abstract class AbilityControllerBase : MonoBehaviour
         AbilityManager.Instance.PerformRangedAttack(player.PlayerIndex, playerPosition2D, aimDirection);
     }
 
-    public void Update() {
+    protected virtual void Update() {
+        // Recover abilities
+        for (int i = 0; i < abilityRecoveryTimes.Length; i++) {
+            if (abilityRecoveryTimes[i] > 0) {
+                abilityRecoveryTimes[i] -= Time.deltaTime;
+                if (abilityRecoveryTimes[i] < 0) {
+                    abilityRecoveryTimes[i] = 0;
+                }
+            }
+        }
+
         // Recover projectiles
         if (ProjectileCount < MaxProjectiles) {
             projectileRecoveryTime -= Time.deltaTime;
