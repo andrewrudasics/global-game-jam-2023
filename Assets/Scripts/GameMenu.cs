@@ -11,8 +11,10 @@ public class GameMenu : MonoBehaviour
     public Texture2D potatoPortraitTexture;
     public Texture2D titleTexture;
     public Texture2D startTexture;
+    public Texture2D showControlsTexture;
+    public Texture2D hideControlsTexture;
+    public Texture2D controlsTexture;
     public Texture2D quitTexture;
-    public Texture2D creditsTexture;
     public Texture2D selectorTexture;
     public Texture2D p1WinTexture;
     public Texture2D p2WinTexture;
@@ -23,6 +25,7 @@ public class GameMenu : MonoBehaviour
     public Texture2D joinTexture;
     public Texture2D startMatchPromptTexture;
     bool hasStarted = false;
+    bool isShowingControls = false;
 
     private int selectedStartMenuIndex = 0;
 
@@ -85,7 +88,7 @@ public class GameMenu : MonoBehaviour
                     if (GameStateManager.Instance.matchStatus == MatchStatus.Ended) {
                         Application.Quit();
                     } else {
-                        // TODO: Credits screen
+                        isShowingControls = !isShowingControls;
                     }
                 } else if (selectedStartMenuIndex == 2) {
                     // Quit Game
@@ -188,7 +191,11 @@ public class GameMenu : MonoBehaviour
             GUILayout.EndHorizontal();
             GUILayout.Space(12);
             GUILayout.BeginHorizontal();
-                GUILayout.Box(creditsTexture, btnStyle);
+                if (!isShowingControls) {
+                    GUILayout.Box(showControlsTexture, btnStyle);
+                } else {
+                    GUILayout.Box(hideControlsTexture, btnStyle);
+                }
                 if (selectedStartMenuIndex == 1) {
                     GUILayoutDrawSelector(0.1f * availableHeight);
                 }
@@ -202,6 +209,19 @@ public class GameMenu : MonoBehaviour
             GUILayout.EndHorizontal();
         GUILayout.EndVertical();
         GUILayout.EndArea();
+
+        if (isShowingControls) {
+            float controlsHeight = btnStyle.fixedHeight * 4.1f;
+            float controlsWidth = controlsHeight / controlsTexture.height * controlsTexture.width;
+            Rect controlsRect = new Rect (btnStyle.fixedWidth * 1.3f, 0.45f * availableHeight, controlsWidth, controlsHeight);
+            GUILayout.BeginArea(controlsRect);
+            GUILayout.BeginVertical();
+                btnStyle.fixedHeight = controlsHeight;
+                btnStyle.fixedWidth = controlsWidth;
+                GUILayout.Box(controlsTexture, btnStyle);
+            GUILayout.EndVertical();
+            GUILayout.EndArea();
+        }
     }
 
     void OnGUIWaitingForPlayers() {

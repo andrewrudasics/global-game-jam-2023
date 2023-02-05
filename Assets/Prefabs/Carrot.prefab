@@ -184,3 +184,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharacterColor: {r: 0.9568628, g: 0.5882353, b: 0.3019608, a: 1}
+<<<<<<< HEAD
+=======
+--- !u!114 &-1688101695083355721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5836464314221876868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a534358859d20334fa5b168a2eb54b0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ThrowingKnifeP1Prefab: {fileID: 8417483731998377226, guid: 7f89bbf81130cd144859799a8023a7f1, type: 3}
+  ThrowingKnifeP2Prefab: {fileID: 8417483731998377226, guid: 89197330ae62c5b4d87167d8f533626c, type: 3}
+  MaxProjectiles: 3
+  ProjectileCount: 3
+  CarrotRainEffectPrefab: {fileID: 8518418177925454263, guid: 36b3c1fbc46a3e64a917854a1a1761e0, type: 3}
+>>>>>>> Added controls UI and carrot rain effect

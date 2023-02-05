@@ -84,6 +84,7 @@ MonoBehaviour:
   LevelObject: {fileID: 0}
   HealthSystem: {fileID: 0}
   WinningPlayer: -1
+  StartingMatchStatus: 0
 --- !u!114 &4091370335329157381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,6 +99,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carrotPortraitTexture: {fileID: 2800000, guid: 3418e6f8e7d3f40498a4ee004c5ca533, type: 3}
   potatoPortraitTexture: {fileID: 2800000, guid: e5a314766f0736843a6d807601b2c168, type: 3}
+  titleTexture: {fileID: 2800000, guid: 508b7db372ea4484895461acf2a09186, type: 3}
+  startTexture: {fileID: 2800000, guid: 57c0b4375fdb27c4abf23642c79612be, type: 3}
+  showControlsTexture: {fileID: 2800000, guid: 78e4ab7500954294d853b967ed3c1cff, type: 3}
+  hideControlsTexture: {fileID: 2800000, guid: b31cb2e7785434147bff3a76b1a8d893, type: 3}
+  controlsTexture: {fileID: 2800000, guid: 105e5559a62f9eb448ac1c7dd49f9de7, type: 3}
+  quitTexture: {fileID: 2800000, guid: 6438ea1f3a83db74d9230faa986d6a52, type: 3}
+  selectorTexture: {fileID: 2800000, guid: b407a67509f56ec47bafb63933382585, type: 3}
+  p1WinTexture: {fileID: 2800000, guid: 0398521b70d1f7c4ba16f979283acd3f, type: 3}
+  p2WinTexture: {fileID: 2800000, guid: eda1d416458db074e8e8ae077b22381b, type: 3}
+  playagainTexture: {fileID: 2800000, guid: ceb091edefb47534ead4a971cd5ead79, type: 3}
+  charSelectTexture: {fileID: 2800000, guid: ab6667f7addde4549becd366e2fb930d, type: 3}
+  potatoStatsTexture: {fileID: 2800000, guid: 40aeadae04066de4790eebc528e6b343, type: 3}
+  carrotStatsTexture: {fileID: 2800000, guid: 6836f6fa06b2cc642ac5e4aaee832432, type: 3}
+  joinTexture: {fileID: 2800000, guid: 6109ebccfea34504c84d5e05e409a7b0, type: 3}
+  startMatchPromptTexture: {fileID: 2800000, guid: 4c3c5cd7af041f54da2b4ab35741c7b6, type: 3}
   selectedCharacter: 0000000000000000
 --- !u!114 &4091370335329157382
 MonoBehaviour:

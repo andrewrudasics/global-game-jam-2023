@@ -5,7 +5,7 @@ using UnityEngine;
 public class AbilityControllerCarrot : AbilityControllerBase
 {
     private float dodgeSpeed = 10.0f;
-
+    public GameObject CarrotRainEffectPrefab;
     // Dodge Roll
     public override void UseAbility1() {
         if (abilityRecoveryTimes[0] > 0) {
@@ -33,6 +33,9 @@ public class AbilityControllerCarrot : AbilityControllerBase
         PlayerController player = GetPlayerController();
         Vector2 cursorPos = player.GetProjectedCursorPosition();        
         AbilityManager.Instance.PerformCircularDamageFieldAttack(player.PlayerIndex, cursorPos, 1.0f, 5);
+        GameObject effectObj = Object.Instantiate(CarrotRainEffectPrefab, new Vector3(cursorPos.x, 0, cursorPos.y), Quaternion.identity);
+        ParticleSystem effect = effectObj.GetComponentInChildren<ParticleSystem>();
+        effect.Play();
     }
     // ???
     public override void UseAbility3() {
