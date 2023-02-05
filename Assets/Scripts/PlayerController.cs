@@ -98,7 +98,8 @@ public class PlayerController : MonoBehaviour
 
         GameObject projectile = Instantiate(Projectile, (transform.position + new Vector3(0,1,0)), shootRotation);
         projectile.GetComponent<Rigidbody>().velocity = shootDirection * ProjectileSpeed;
-        
+        projectile.GetComponent<ProjectileAttack>().owningPlayer = PlayerIndex;
+
         Debug.Log("Shoot Pressed");
 
     }

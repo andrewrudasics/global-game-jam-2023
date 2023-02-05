@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 5012305748529044113}
   - component: {fileID: 7880577714161314777}
   - component: {fileID: 3606636266759217169}
+  - component: {fileID: 8127821481910437799}
   m_Layer: 0
   m_Name: Throwing Knife
   m_TagString: Projectile
@@ -160,3 +161,16 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.4
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8127821481910437799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8417483731998377226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e913f4c46a6c30b449e0def154f3a8d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owningPlayer: -1
