@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class AttackCircularProjectile : MonoBehaviour
     public float Speed = 5.0f;
     public float Radius = 0.3f;
     public float Damage = 5;
+    public Action<GameObject> AttackEndCallback = null;
 
     private int frameCounter = 0;
     private int framesBeforeCollisionCheck = 30;
@@ -35,6 +37,9 @@ public class AttackCircularProjectile : MonoBehaviour
     void Update()
     {
         if (lifeCountdown <= 0) {
+            if (AttackEndCallback != null) {
+                AttackEndCallback(null);
+            }
             Cleanup();
         }
         lifeCountdown -= Time.deltaTime;
@@ -44,7 +49,11 @@ public class AttackCircularProjectile : MonoBehaviour
 
         frameCounter += 1;
         if (frameCounter % framesBeforeCollisionCheck == 0) {
-            if (AbilityManager.Instance.PerformCircularAttack(OwningPlayer, position, Radius, Damage)) {
+            GameObject hitPlayer = AbilityManager.Instance.PerformCircularAttack(OwningPlayer, position, Radius, Damage);
+            if (hitPlayer) {
+                if (AttackEndCallback != null) {
+                    AttackEndCallback(hitPlayer);
+                }
                 Cleanup();
             }
         }

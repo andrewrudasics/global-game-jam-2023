@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,7 +35,7 @@ public class AbilityManager : MonoBehaviour
     }
 
     public void PerformCircularDamageFieldAttack(int owningPlayer, Vector2 position2D, float radius, float tickDamage) {
-        GameObject attackObject = Object.Instantiate(CircularDamageFieldPrefab, AttacksContainer.transform);
+        GameObject attackObject = UnityEngine.Object.Instantiate(CircularDamageFieldPrefab, AttacksContainer.transform);
         AttackCircularDamageField atk = attackObject.GetComponent<AttackCircularDamageField>();
         atk.OwningPlayer = owningPlayer;
         atk.AttackDurationS = 5;
@@ -44,25 +45,22 @@ public class AbilityManager : MonoBehaviour
         atk.TickDamage = tickDamage;
     }
 
-    public void PerformProjectileAttack(int owningPlayer, Vector2 position2D, Vector2 direction2D, float damage) {
-        GameObject attackObject = Object.Instantiate(CircularProjectilePrefab, AttacksContainer.transform);
+    public GameObject PerformProjectileAttack(int owningPlayer, Vector2 position2D, Vector2 direction2D, float radius, float damage, float duration, float speed, Action<GameObject> onEndCallback = null) {
+        GameObject attackObject = UnityEngine.Object.Instantiate(CircularProjectilePrefab, AttacksContainer.transform);
         AttackCircularProjectile atk = attackObject.GetComponent<AttackCircularProjectile>();
         atk.OwningPlayer = owningPlayer;
         atk.StartingPosition2D = position2D;
         atk.Direction = direction2D;
-        atk.Radius = 0.3f;
+        atk.Radius = radius;
+        atk.MaximumLifetimeS = duration;
         atk.Damage = damage;
-        atk.Speed = 0.01f;
-
-        // Attach Knife onto it
-        Vector3 direction = new Vector3(direction2D.x, 0, direction2D.y);
-        Quaternion shootRotation = Quaternion.FromToRotation(Vector3.right, direction);
-        GameObject knife = Instantiate(ThrowingKnifePrefab, attackObject.transform);
-        attackObject.transform.rotation = shootRotation;
+        atk.Speed = speed;
+        atk.AttackEndCallback = onEndCallback;
+        return attackObject;
     }
 
-    public bool PerformRectangularAttack(int owningPlayer, Vector2 position2D, float width, float length, Vector2 direction, float damage) {
-        bool hitAnyPlayers = false;
+    public GameObject PerformRectangularAttack(int owningPlayer, Vector2 position2D, float width, float length, Vector2 direction, float damage) {
+        GameObject hitPlayer = null;
 
         // Rectangular Attack
         Vector3 position = new Vector3(position2D.x, 0, position2D.y);
@@ -73,7 +71,7 @@ public class AbilityManager : MonoBehaviour
 
         // Debug Visualization
         if (DebugCollision) {
-            GameObject effectContainer = Object.Instantiate(DebugRectangularAttackEffectPrefab, DebugEffectContainer.transform);
+            GameObject effectContainer = UnityEngine.Object.Instantiate(DebugRectangularAttackEffectPrefab, DebugEffectContainer.transform);
             effectContainer.transform.position = position;
             ParticleSystem effect = effectContainer.GetComponentInChildren<ParticleSystem>();
             effect.gameObject.transform.localPosition = attackCenter - position;
@@ -94,20 +92,20 @@ public class AbilityManager : MonoBehaviour
             int playerIndex = playerController.PlayerIndex;
             if (playerIndex != owningPlayer) {
                 HealthBarManager.Instance.DamagePlayer(playerIndex, (int)ComputeDamageOnPlayer(playerController, damage));
-                hitAnyPlayers = true;
+                hitPlayer = collider.gameObject;
             }
         }
 
-        return hitAnyPlayers;
+        return hitPlayer;
     }
 
-    public bool PerformCircularAttack(int owningPlayer, Vector2 position2D, float radius, float damage) {
-        bool hitAnyPlayers = false;
+    public GameObject PerformCircularAttack(int owningPlayer, Vector2 position2D, float radius, float damage) {
+        GameObject hitPlayer = null;
         Vector3 attackCenter = new Vector3(position2D.x, 0, position2D.y);
 
         // Debug Visualization
         if (DebugCollision) {
-            GameObject effectContainer = Object.Instantiate(DebugCircularAttackEffectPrefab, DebugEffectContainer.transform);
+            GameObject effectContainer = UnityEngine.Object.Instantiate(DebugCircularAttackEffectPrefab, DebugEffectContainer.transform);
             effectContainer.transform.position = attackCenter;
             ParticleSystem effect = effectContainer.GetComponentInChildren<ParticleSystem>();
             ParticleSystem.MainModule main = effect.main;
@@ -126,10 +124,10 @@ public class AbilityManager : MonoBehaviour
             int playerIndex = playerController.PlayerIndex;
             if (playerIndex != owningPlayer) {
                 HealthBarManager.Instance.DamagePlayer(playerIndex, (int)ComputeDamageOnPlayer(playerController, damage));
-                hitAnyPlayers = true;
+                hitPlayer = collider.gameObject;
             }
         }
-        return hitAnyPlayers;
+        return hitPlayer;
     }
 
     public float ComputeDamageOnPlayer(PlayerController player, float damage) {

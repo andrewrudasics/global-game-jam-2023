@@ -102,15 +102,15 @@ public class PlayerManager : MonoBehaviour
     public void SpawnPlayers() {
         // Attach models to the player objects
         foreach (PlayerInput input in playerInputs) {
-            GameObject spriteObject;
+            GameObject characterObj;
             if (GameMenu.Instance.selectedCharacter[input.playerIndex] == 0) {
-                spriteObject = Object.Instantiate(PotatoCharacter, input.gameObject.transform);
+                characterObj = Object.Instantiate(PotatoCharacter, input.gameObject.transform);
             } else {
-                spriteObject = Object.Instantiate(CarrotCharacter, input.gameObject.transform);
+                characterObj = Object.Instantiate(CarrotCharacter, input.gameObject.transform);
             }
             PlayerController player = input.gameObject.GetComponent<PlayerController>();
             player.SelectedCharacter = GameMenu.Instance.selectedCharacter[input.playerIndex];
-            player.SetCharacterSprite(spriteObject);
+            player.SetCharacterSprite(characterObj.GetComponentInChildren<Animator>().gameObject);
             input.gameObject.transform.position = SpawnLocations[input.playerIndex].position;
         }
     }

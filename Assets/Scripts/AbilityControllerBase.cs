@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class AbilityControllerBase : MonoBehaviour
 {
+    public GameObject ThrowingKnifePrefab;
     protected int MaxProjectiles = 3;
     [HideInInspector]
     public int ProjectileCount = 3;
@@ -17,7 +18,7 @@ public abstract class AbilityControllerBase : MonoBehaviour
     }
 
     protected virtual Animator GetAnimator() {
-        return this.GetComponent<Animator>();
+        return this.GetComponentInChildren<Animator>();
     }
 
     public abstract void UseAbility1();
@@ -42,11 +43,18 @@ public abstract class AbilityControllerBase : MonoBehaviour
         
         ProjectileCount -= 1;
 
+        // Fire a projectile
         PlayerController player = GetPlayerController();
         Vector2 cursorPosProjected = player.GetProjectedCursorPosition();
         Vector2 playerPosition2D = new Vector2(transform.position.x, transform.position.z);
         Vector2 aimDirection = (cursorPosProjected - playerPosition2D).normalized;
-        AbilityManager.Instance.PerformProjectileAttack(player.PlayerIndex, playerPosition2D, aimDirection, 5);
+        GameObject attackObject = AbilityManager.Instance.PerformProjectileAttack(player.PlayerIndex, playerPosition2D, aimDirection, 0.3f, 5, 5, 0.01f);
+
+        // Attach Knife onto projectile
+        Vector3 direction = new Vector3(aimDirection.x, 0, aimDirection.y);
+        Quaternion shootRotation = Quaternion.FromToRotation(Vector3.right, direction);
+        GameObject knife = Instantiate(ThrowingKnifePrefab, attackObject.transform);
+        attackObject.transform.rotation = shootRotation;
     }
 
     protected virtual void Update() {

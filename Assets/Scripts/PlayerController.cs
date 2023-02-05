@@ -23,6 +23,9 @@ public class PlayerController : MonoBehaviour
         }
     }
     public bool IsRooted { get; set; }
+    private float rootedDuration = 0;
+    public bool IsSlowed { get; set; }
+    private float slowedDuration = 0;
 
     private Vector2 moveAxis, lookAxis, mousePosScreenSpace, mousePosProjected;
     private Camera mainCamera;
@@ -46,11 +49,37 @@ public class PlayerController : MonoBehaviour
         return this.GetComponentInChildren<AbilityControllerBase>();
     }
 
+    public void SetRootedStatus(float duration) {
+        IsRooted = true;
+        rootedDuration = duration;
+    }
+
+    public void SetSlowStatus(float duration) {
+        IsSlowed = true;
+        slowedDuration = duration;
+    }
+
     void Start()
     {
         mainCamera = Camera.main;
         rb = gameObject.GetComponent<Rigidbody>();
         lookAxis = new Vector2(1, 0);
+    }
+
+    void Update() {
+        if (IsRooted) {
+            rootedDuration -= Time.deltaTime;
+            if (rootedDuration < 0) {
+                IsRooted = false;
+            }
+        }
+
+        if (IsSlowed) {
+            slowedDuration -= Time.deltaTime;
+            if (slowedDuration < 0) {
+                IsSlowed = false;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -81,19 +110,15 @@ public class PlayerController : MonoBehaviour
         Vector3 camForward = new Vector3(camDir.x, 0, camDir.z).normalized;
         Vector3 camRight = Vector3.Cross(camForward, mainCamera.transform.up.normalized).normalized;
 
-        if (spriteRenderer != null)
-        {
-            if (moveAxis.x < 0)
-            {
-                spriteRenderer.flipX = false;
-            }
-            else if (moveAxis.x > 0)
-            {
-                spriteRenderer.flipX = true;
-            }
-        }
-
         if (!IsRooted) {
+            if (spriteRenderer != null) {
+                if (moveAxis.x < 0) {
+                    spriteRenderer.flipX = false;
+                } else if (moveAxis.x > 0) {
+                    spriteRenderer.flipX = true;
+                }
+            }
+
             Vector3 moveDir = (-1.0f * camRight * moveAxis.x) + (camForward * moveAxis.y);
             if (anim != null) {
                 if (moveDir.magnitude > 0.001f) {
@@ -102,7 +127,8 @@ public class PlayerController : MonoBehaviour
                     anim.SetBool("moving", false);
                 }
             }
-            rb.MovePosition(transform.position + (moveDir * moveSpeed * Time.deltaTime));
+            float modifiedMovementSpeed = IsSlowed ? moveSpeed * 0.3f : moveSpeed;
+            rb.MovePosition(transform.position + (moveDir * modifiedMovementSpeed * Time.deltaTime));
         }
     }
 

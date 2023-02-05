@@ -26,13 +26,27 @@ public class AbilityControllerPotato : AbilityControllerBase
         }
         abilityRecoveryTimes[1] = abilityCooldownsS[1];
 
-        // TODO: Implement Me
-        GetAnimator().SetBool("lunging", true);
-        // Basically send a projectile where the potato itself is the projectile
-        // The projectile should basically every frame just check collision
         PlayerController player = GetPlayerController();
-        Vector2 cursorPos = player.GetProjectedCursorPosition();        
-        AbilityManager.Instance.PerformCircularAttack(player.PlayerIndex, cursorPos, 1.0f, 10);
+
+        GetAnimator().SetBool("lunging", true);
+        player.IsRooted = true;
+
+        // Basically send a projectile where the potato itself is the projectile
+        Vector2 cursorPosProjected = player.GetProjectedCursorPosition();
+        Vector2 playerPosition2D = new Vector2(transform.position.x, transform.position.z);
+        Vector2 aimDirection = (cursorPosProjected - playerPosition2D).normalized; 
+        Transform parent = transform.parent;
+        // GameObject potatoSprite = GetAnimator().gameObject;
+        GameObject attackObject = AbilityManager.Instance.PerformProjectileAttack(player.PlayerIndex, playerPosition2D, aimDirection, 0.4f, 15, 0.5f, 0.01f, (GameObject hitPlayer) => {
+            if (hitPlayer) {
+                hitPlayer.GetComponent<PlayerController>().SetSlowStatus(1);
+            }
+            parent.transform.position = transform.position;
+            transform.SetParent(parent, false);
+            GetAnimator().SetBool("lunging", false);
+            player.IsRooted = false;
+        });
+        transform.SetParent(attackObject.transform, false);
     }
     // Leap
     public override void UseAbility3() {
