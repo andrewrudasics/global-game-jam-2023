@@ -55,25 +55,40 @@ public class GameMenu : MonoBehaviour
     }
 
     public async void OnStart(int playerIndex) {
-        if (hasStarted) { return; }
-        hasStarted = true;
-        MatchCountdown = 3;
-        await Task.Delay(1000);
-        while (MatchCountdown > 0)
-        {
-            MatchCountdown -= 1;
+        Debug.Log("OnStart");
+        if (GameStateManager.Instance.matchStatus == MatchStatus.Ended) {
+            GameStateManager.Instance.CharacterSelect();
+        } else if (GameStateManager.Instance.matchStatus == MatchStatus.WaitingForPlayers) {
+            // Begin a countdown to start the game
+            if (hasStarted) { return; }
+            hasStarted = true;
+            MatchCountdown = 3;
             await Task.Delay(1000);
+            while (MatchCountdown > 0)
+            {
+                MatchCountdown -= 1;
+                await Task.Delay(1000);
+            }
+            GameStateManager.Instance.StartGame();
+            MatchCountdown = -1;
+            hasStarted = false;
         }
-        GameStateManager.Instance.StartGame();
     }
 
     void OnGUI()
     {
         MatchStatus status = GameStateManager.Instance.matchStatus;
-        if (status != MatchStatus.WaitingForPlayers) {
-            return;
+        switch (GameStateManager.Instance.matchStatus) {
+            case MatchStatus.WaitingForPlayers:
+                OnGUIWaitingForPlayers();
+                break;
+            case MatchStatus.Ended:
+                OnGUIMatchEnded();
+                break;
         }
-        
+    }
+
+    void OnGUIWaitingForPlayers() {
         GUIStyle containerStyle = new GUIStyle();
         // containerStyle.normal.background = menuTexture;
         // containerStyle.margin=new RectOffset(11,22,33,44);
@@ -108,6 +123,28 @@ public class GameMenu : MonoBehaviour
             GUILayout.EndHorizontal();
             GUILayout.FlexibleSpace();
             MatchStartText();
+        GUILayout.EndVertical();
+        GUILayout.EndArea();
+    }
+
+    void OnGUIMatchEnded() {
+        Rect menuRect = new Rect (100, 100, Screen.width-200, Screen.height-200);
+        GUILayout.BeginArea(menuRect, UnityEditor.EditorStyles.helpBox);
+        GUILayout.BeginVertical();
+            GUILayout.FlexibleSpace();
+            GUILayout.BeginHorizontal();
+                GUILayout.FlexibleSpace();
+                int winningPlayer = GameStateManager.Instance.WinningPlayer + 1;
+                GUILayout.Label("Player " + winningPlayer + " is the SOUP SURVIVOR!!");
+                GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+            GUILayout.FlexibleSpace();
+            GUILayout.BeginHorizontal();
+                GUILayout.FlexibleSpace();
+                GUILayout.Label("Press [Enter] on keyboard or START on controller to play again");
+                GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+            GUILayout.FlexibleSpace();
         GUILayout.EndVertical();
         GUILayout.EndArea();
     }

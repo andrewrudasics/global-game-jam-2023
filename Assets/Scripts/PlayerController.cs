@@ -28,13 +28,15 @@ public class PlayerController : MonoBehaviour
     {
         mainCamera = Camera.main;
         rb = gameObject.GetComponent<Rigidbody>();
-
-        
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!crosshair) {
+            return;
+        }
+
         // Crosshair Position
         crosshair.transform.position = new Vector3(mousePosProjected.x, 0.01f, mousePosProjected.y);
 
@@ -149,8 +151,6 @@ public class PlayerController : MonoBehaviour
             Color charColor = characterSprite.GetComponent<ColorInfo>().CharacterColor;
             SpriteRenderer crosshairRenderer = crosshair.GetComponentInChildren<SpriteRenderer>();
             crosshairRenderer.color = charColor;
-            
-
         }
     }
 }

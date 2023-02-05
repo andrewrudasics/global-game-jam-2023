@@ -61,6 +61,7 @@ public class AbilityManager : MonoBehaviour
             int playerIndex = playerController.PlayerIndex;
             if (playerIndex != owningPlayer) {
                 Debug.Log("Player Hit: " + playerIndex);
+                HealthBarManager.Instance.DamagePlayer(playerIndex, 10);
             }
         }
     }

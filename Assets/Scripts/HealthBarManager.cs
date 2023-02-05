@@ -54,9 +54,20 @@ public class HealthBarManager : MonoBehaviour
         HealthBarScript player1Health = player1HealthObject.GetComponent<HealthBarScript>();
         player1Health.SetHealth(100);
     }
+
+    public void ResetHealth() {
+        player1HealthObject.GetComponent<HealthBarScript>().SetHealth(100);
+        player2HealthObject.GetComponent<HealthBarScript>().SetHealth(100);
+    }
     
     public void DamagePlayer(int playerIndex, int damageAmount) {
-        // player1Health.damagePlayer
+        if (playerIndex == 0) {
+            HealthBarScript playerHealth = player1HealthObject.GetComponent<HealthBarScript>();
+            playerHealth.DamagePlayer(playerIndex, damageAmount);
+        } else {
+            HealthBarScript playerHealth = player2HealthObject.GetComponent<HealthBarScript>();
+            playerHealth.DamagePlayer(playerIndex, damageAmount);
+        }
         
     }
     

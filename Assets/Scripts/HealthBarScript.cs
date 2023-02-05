@@ -19,4 +19,13 @@ public class HealthBarScript : MonoBehaviour
     {
         slider.value = health;
     }
+
+    public void DamagePlayer(int playerIndex, int damageAmount) {
+        float newValue = slider.value - damageAmount;
+        if (newValue <= 0) {
+            GameStateManager.Instance.OnPlayerDeath(playerIndex);
+            newValue = 0;
+        }
+        slider.value = newValue;
+    }
 }

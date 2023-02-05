@@ -68,7 +68,12 @@ public class PlayerManager : MonoBehaviour
     }
 
     public void DespawnPlayers() {
-        // TODO: Remove models from player objects
+        foreach (PlayerInput input in playerInputs) {
+            Component component = input.transform.GetComponentInChildren<ColorInfo>();
+            if (component) {
+                Destroy(component.gameObject);
+            }
+        }
     }
 
     void OnPlayerJoined(PlayerInput player) {
