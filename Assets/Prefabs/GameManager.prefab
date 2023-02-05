@@ -41,8 +41,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4091370335329157379}
   - component: {fileID: 4091370335329157380}
-  - component: {fileID: 4091370335329157382}
   - component: {fileID: 4091370335329157381}
+  - component: {fileID: 4091370335329157382}
   - component: {fileID: 4091370335329157383}
   m_Layer: 0
   m_Name: GameManager
@@ -80,24 +80,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   matchStatus: 0
---- !u!114 &4091370335329157382
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4091370335329157378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 041faad429abc8d459c0b661860e8d8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerPrefab: {fileID: 7359279044238956857, guid: c4aab32056ed5ee4ab3341caa229355e, type: 3}
-  CarrotCharacter: {fileID: 3686208248568123789, guid: 495d197e764ad704ab92b7244b13cd58, type: 3}
-  PotatoCharacter: {fileID: 6428101243939207069, guid: f93c91ca66c71964ba2e08ce7ca56fb2, type: 3}
-  SpawnLocations:
-  - {fileID: 4091370336769022238}
-  - {fileID: 4091370335201894095}
 --- !u!114 &4091370335329157381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,6 +95,24 @@ MonoBehaviour:
   carrotPortraitTexture: {fileID: 2800000, guid: 3418e6f8e7d3f40498a4ee004c5ca533, type: 3}
   potatoPortraitTexture: {fileID: 2800000, guid: e5a314766f0736843a6d807601b2c168, type: 3}
   selectedCharacter: 0000000000000000
+--- !u!114 &4091370335329157382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4091370335329157378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 041faad429abc8d459c0b661860e8d8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerPrefab: {fileID: 7359279044238956857, guid: c4aab32056ed5ee4ab3341caa229355e, type: 3}
+  CarrotCharacter: {fileID: 5836464314221876868, guid: e16f93b457456074699d46460abe0c33, type: 3}
+  PotatoCharacter: {fileID: 5634501935609011854, guid: 81af963872d8a13489e3fddfe4662597, type: 3}
+  SpawnLocations:
+  - {fileID: 4091370336769022238}
+  - {fileID: 4091370335201894095}
 --- !u!114 &4091370335329157383
 MonoBehaviour:
   m_ObjectHideFlags: 0

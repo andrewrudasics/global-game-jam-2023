@@ -37,8 +37,8 @@ public class PlayerManager : MonoBehaviour
         // Add the prefabs to the scene so that we can start getting PlayerInput
         playerInputs[0] = PlayerInput.Instantiate(PlayerPrefab, controlScheme: "Player1", pairWithDevice: Keyboard.current);
         playerInputs[1] = PlayerInput.Instantiate(PlayerPrefab, controlScheme: "Player2", pairWithDevice: Keyboard.current);
-        playerInputs[0].gameObject.GetComponent<DummyPlayerController>().PlayerIndex = 0;
-        playerInputs[1].gameObject.GetComponent<DummyPlayerController>().PlayerIndex = 1;
+        playerInputs[0].gameObject.GetComponent<PlayerController>().PlayerIndex = 0;
+        playerInputs[1].gameObject.GetComponent<PlayerController>().PlayerIndex = 1;
         SwitchActionMaps("menu");
     }
 
@@ -56,11 +56,13 @@ public class PlayerManager : MonoBehaviour
     public void SpawnPlayers() {
         // Attach models to the player objects
         foreach (PlayerInput input in playerInputs) {
+            GameObject spriteObject;
             if (GameMenu.Instance.selectedCharacter[input.playerIndex] == 0) {
-                Object.Instantiate(PotatoCharacter, input.gameObject.transform);
+                spriteObject = Object.Instantiate(PotatoCharacter, input.gameObject.transform);
             } else {
-                Object.Instantiate(CarrotCharacter, input.gameObject.transform);
+                spriteObject = Object.Instantiate(CarrotCharacter, input.gameObject.transform);
             }
+            input.gameObject.GetComponent<PlayerController>().SetCharacterSprite(spriteObject);
             input.gameObject.transform.position = SpawnLocations[input.playerIndex].position;
         }
     }

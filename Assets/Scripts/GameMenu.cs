@@ -8,6 +8,7 @@ public class GameMenu : MonoBehaviour
     private int MatchCountdown = -1;
     public Texture2D carrotPortraitTexture;
     public Texture2D potatoPortraitTexture;
+    bool hasStarted = false;
 
     private static GameMenu _instance;
 
@@ -54,9 +55,12 @@ public class GameMenu : MonoBehaviour
     }
 
     public async void OnStart(int playerIndex) {
+        if (hasStarted) { return; }
+        hasStarted = true;
         MatchCountdown = 3;
         await Task.Delay(1000);
-        while (MatchCountdown > 0) {
+        while (MatchCountdown > 0)
+        {
             MatchCountdown -= 1;
             await Task.Delay(1000);
         }
