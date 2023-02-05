@@ -57,6 +57,7 @@ public class AbilityControllerCarrot : AbilityControllerBase
     }
 
     void Start() {
+        MeleeCooldownS = 0.5f;
         abilityCooldownsS[0] = 4.0f;
         abilityCooldownsS[1] = 5.0f;
         abilityCooldownsS[2] = 2.0f;

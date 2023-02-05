@@ -222,8 +222,6 @@ MonoBehaviour:
   Projectile: {fileID: 8417483731998377226, guid: 89197330ae62c5b4d87167d8f533626c, type: 3}
   ProjectileSpeed: 5
   ProjectileCount: 5
-  MeleeKnife: {fileID: 0}
-  MeleeSweepAngle: 0
 --- !u!136 &8751489601175405910
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ public abstract class AbilityControllerBase : MonoBehaviour
     public GameObject MeleeKnifePrefab;
     public float MeleeSweepAngle;
     protected float MeleeCooldownS = 1.0f;
+    protected float meleeRecoveryTime;
     public float MeleeAnimationDuration = 0.5f;
     protected float[] abilityCooldownsS = new float[4];
     protected float[] abilityRecoveryTimes = new float[4]; // 0 means it's ready to use
@@ -33,7 +34,13 @@ public abstract class AbilityControllerBase : MonoBehaviour
     public virtual float GetAbilityCooledDownPercent(int abilityIndex) {
         return (1 - abilityRecoveryTimes[abilityIndex] / abilityCooldownsS[abilityIndex]);
     }
-    public virtual void AttackMelee() { 
+    public virtual void AttackMelee() {
+        if (meleeRecoveryTime > 0)
+        {
+            return;
+        }
+        meleeRecoveryTime = MeleeCooldownS;
+
         PlayerController player = GetPlayerController();
         Vector2 cursorPosProjected = player.GetProjectedCursorPosition();
         Vector2 playerPosition2D = new Vector2(transform.position.x, transform.position.z);
@@ -61,7 +68,7 @@ public abstract class AbilityControllerBase : MonoBehaviour
         Vector2 cursorPosProjected = player.GetProjectedCursorPosition();
         Vector2 playerPosition2D = new Vector2(transform.position.x, transform.position.z);
         Vector2 aimDirection = (cursorPosProjected - playerPosition2D).normalized;
-        GameObject attackObject = AbilityManager.Instance.PerformProjectileAttack(player.PlayerIndex, playerPosition2D, aimDirection, 0.3f, 5, 5, 0.01f);
+        GameObject attackObject = AbilityManager.Instance.PerformProjectileAttack(player.PlayerIndex, playerPosition2D, aimDirection, 0.3f, 5, 5, 0.02f);
 
         // Attach Knife onto projectile
         Vector3 direction = new Vector3(aimDirection.x, 0, aimDirection.y);
@@ -76,6 +83,16 @@ public abstract class AbilityControllerBase : MonoBehaviour
     }
 
     protected virtual void Update() {
+        // Recover Melee
+        if (meleeRecoveryTime > 0)
+        {
+            meleeRecoveryTime -= Time.deltaTime;
+            if (meleeRecoveryTime < 0)
+            {
+                meleeRecoveryTime = 0;
+            }
+        }
+
         // Recover abilities
         for (int i = 0; i < abilityRecoveryTimes.Length; i++) {
             if (abilityRecoveryTimes[i] > 0) {
