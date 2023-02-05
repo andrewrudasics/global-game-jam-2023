@@ -78,12 +78,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9024ec6b8e8ced44f89f7494d0a0e183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ProjectilePrefab: {fileID: 8417483731998377226, guid: 89197330ae62c5b4d87167d8f533626c, type: 3}
-  ProjectileSpeed: 5
+  DebugCollision: 1
+  ThrowingKnifePrefab: {fileID: 8417483731998377226, guid: 89197330ae62c5b4d87167d8f533626c, type: 3}
   AttacksContainer: {fileID: 7924603085684658898}
   DebugEffectContainer: {fileID: 1186911819344964181}
   DebugRectangularAttackEffectPrefab: {fileID: 6937053446108078698, guid: 968d30ce6d7d60d4a85bb4ca4d987fa6, type: 3}
   DebugCircularAttackEffectPrefab: {fileID: 7565541245409818357, guid: f39fa253638106b4f948b82f5c7057ab, type: 3}
+  CircularProjectilePrefab: {fileID: 3859009786188407110, guid: f3fe410287abc934d90d22875201b438, type: 3}
   CircularDamageFieldPrefab: {fileID: 1672813848782109356, guid: a8ed18ca1975b6045a43c83711d5b9b4, type: 3}
 --- !u!114 &11179879
 MonoBehaviour:

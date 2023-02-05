@@ -4,9 +4,9 @@ using UnityEngine;
 
 public abstract class AbilityControllerBase : MonoBehaviour
 {
-    protected int MaxProjectiles = 5;
+    protected int MaxProjectiles = 3;
     [HideInInspector]
-    public int ProjectileCount = 5;
+    public int ProjectileCount = 3;
     protected float ProjectileCooldownS = 1.0f;
     protected float projectileRecoveryTime; // Time until next projectile is ready
     protected float[] abilityCooldownsS = new float[4];
@@ -46,7 +46,7 @@ public abstract class AbilityControllerBase : MonoBehaviour
         Vector2 cursorPosProjected = player.GetProjectedCursorPosition();
         Vector2 playerPosition2D = new Vector2(transform.position.x, transform.position.z);
         Vector2 aimDirection = (cursorPosProjected - playerPosition2D).normalized;
-        AbilityManager.Instance.PerformRangedAttack(player.PlayerIndex, playerPosition2D, aimDirection);
+        AbilityManager.Instance.PerformProjectileAttack(player.PlayerIndex, playerPosition2D, aimDirection, 5);
     }
 
     protected virtual void Update() {
