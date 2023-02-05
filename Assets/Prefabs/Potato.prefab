@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5634501935609011849}
   - component: {fileID: 5634501935609011850}
   - component: {fileID: 4690099792642848971}
+  - component: {fileID: -2107054963837133841}
   m_Layer: 0
   m_Name: Potato
   m_TagString: Untagged
@@ -132,3 +133,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharacterColor: {r: 0.45098042, g: 0.3137255, b: 0.21568629, a: 1}
+--- !u!114 &-2107054963837133841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5634501935609011854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80b47f003da25a845a03af7130f1d137, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxProjectiles: 5
+  ProjectileCount: 5
+  ProjectileCooldownS: 1

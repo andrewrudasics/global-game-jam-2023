@@ -183,14 +183,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: AbilityManager
       objectReference: {fileID: 0}
-    - target: {fileID: 1728406466111167821, guid: 907c56179fa6ca74791a125581a106b3, type: 3}
-      propertyPath: DebugCircularAttackEffectPrefab
-      value: 
-      objectReference: {fileID: 7565541245409818357, guid: f39fa253638106b4f948b82f5c7057ab, type: 3}
-    - target: {fileID: 1728406466111167821, guid: 907c56179fa6ca74791a125581a106b3, type: 3}
-      propertyPath: DebugRectangularAttackEffectPrefab
-      value: 
-      objectReference: {fileID: 6937053446108078698, guid: 968d30ce6d7d60d4a85bb4ca4d987fa6, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 907c56179fa6ca74791a125581a106b3, type: 3}
 --- !u!1001 &729721468

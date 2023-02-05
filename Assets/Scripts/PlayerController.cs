@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     public float moveSpeed = 5.0f;
     public int PlayerIndex = -1;
+    public int SelectedCharacter = -1;
 
     private Vector2 moveAxis, mousePosScreenSpace, mousePosProjected;
     private Camera mainCamera;
@@ -21,8 +22,16 @@ public class PlayerController : MonoBehaviour
     public GameObject crosshair;
 
     public GameObject Projectile;
-    public float ProjectileSpeed;
+    public float ProjectileSpeed = 5;
+    public int ProjectileCount = 5;
 
+    public Vector2 GetProjectedMousePosition() {
+        return mousePosProjected;
+    }
+
+    public AbilityControllerBase GetAbilityController() {
+        return this.GetComponentInChildren<AbilityControllerBase>();
+    }
 
     void Start()
     {
@@ -82,25 +91,29 @@ public class PlayerController : MonoBehaviour
     {
         moveAxis = value.Get<Vector2>();
     }
-
     void OnMelee()
     {
-        Vector2 playerPosition2D = new Vector2(transform.position.x, transform.position.z);
-        Vector2 aimDirection = (mousePosProjected - playerPosition2D).normalized;
-        AbilityManager.Instance.PerformRectangularAttack(PlayerIndex, playerPosition2D, 1.0f, 2.0f, aimDirection);
+        GetAbilityController().AttackMelee();
     }
-
     void OnShoot()
     {
-        Vector3 shootDirection = (crosshair.transform.position - transform.position).normalized;
-
-        // Quaternion shootRotation = Quaternion.FromToRotation(Vector3.right, shootDirection);
-
-        // GameObject projectile = Instantiate(Projectile, (transform.position + new Vector3(0,1,0)), shootRotation);
-        // projectile.GetComponent<Rigidbody>().velocity = shootDirection * ProjectileSpeed;
-        // projectile.GetComponent<ProjectileAttack>().owningPlayer = PlayerIndex;
-
-        AbilityManager.Instance.PerformCircularAttack(PlayerIndex, mousePosProjected, 1.0f);
+        GetAbilityController().AttackRanged();
+    }
+    void OnAbility1()
+    {
+        GetAbilityController().UseAbility1();
+    }
+    void OnAbility2()
+    {
+        GetAbilityController().UseAbility2();
+    }
+    void OnAbility3()
+    {
+        GetAbilityController().UseAbility3();
+    }
+    void OnAbility4()
+    {
+        GetAbilityController().UseAbility4();
     }
 
     void OnAim(InputValue value)

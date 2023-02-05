@@ -22,6 +22,10 @@ public class PlayerManager : MonoBehaviour
         return hasPlayerJoined[playerIndex];
     }
 
+    public PlayerController GetPlayerController(int playerIndex) {
+        return playerInputs[playerIndex].gameObject.GetComponent<PlayerController>();
+    }
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -62,7 +66,9 @@ public class PlayerManager : MonoBehaviour
             } else {
                 spriteObject = Object.Instantiate(CarrotCharacter, input.gameObject.transform);
             }
-            input.gameObject.GetComponent<PlayerController>().SetCharacterSprite(spriteObject);
+            PlayerController player = input.gameObject.GetComponent<PlayerController>();
+            player.SelectedCharacter = GameMenu.Instance.selectedCharacter[input.playerIndex];
+            player.SetCharacterSprite(spriteObject);
             input.gameObject.transform.position = SpawnLocations[input.playerIndex].position;
         }
     }

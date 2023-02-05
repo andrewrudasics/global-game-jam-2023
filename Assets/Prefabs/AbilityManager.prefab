@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1728406466111167818}
   - component: {fileID: 1728406466111167821}
+  - component: {fileID: 11179879}
   m_Layer: 0
   m_Name: AbilityManager
   m_TagString: Untagged
@@ -76,5 +77,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9024ec6b8e8ced44f89f7494d0a0e183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ProjectilePrefab: {fileID: 8417483731998377226, guid: 89197330ae62c5b4d87167d8f533626c, type: 3}
+  ProjectileSpeed: 5
+  DebugEffectContainer: {fileID: 1186911819344964181}
   DebugRectangularAttackEffectPrefab: {fileID: 6937053446108078698, guid: 968d30ce6d7d60d4a85bb4ca4d987fa6, type: 3}
   DebugCircularAttackEffectPrefab: {fileID: 7565541245409818357, guid: f39fa253638106b4f948b82f5c7057ab, type: 3}
+--- !u!114 &11179879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728406466111167820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32982d9cecad84c43a886c7a09d3fb2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skin: {fileID: 11400000, guid: 819a28d8e9f1a6045b2864f51b3c7910, type: 2}
+  knifeSprite: {fileID: 2800000, guid: 45e3adcd1cb7d5a4db627d49e5355d93, type: 3}

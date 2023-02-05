@@ -6,6 +6,9 @@ using UnityEngine.InputSystem;
 public class AbilityManager : MonoBehaviour
 {
     private static AbilityManager _instance;
+    public GameObject ProjectilePrefab;
+    public float ProjectileSpeed = 5;
+    public GameObject DebugEffectContainer;
     public GameObject DebugRectangularAttackEffectPrefab;
     public GameObject DebugCircularAttackEffectPrefab;
 
@@ -27,6 +30,15 @@ public class AbilityManager : MonoBehaviour
         }
     }
 
+    public void PerformRangedAttack(int owningPlayer, Vector2 position2D, Vector2 direction2D) {
+        Vector3 position = new Vector3(position2D.x, 0, position2D.y);
+        Vector3 direction = new Vector3(direction2D.x, 0, direction2D.y);
+        Quaternion shootRotation = Quaternion.FromToRotation(Vector3.right, direction);
+        GameObject projectile = Instantiate(ProjectilePrefab, (position + new Vector3(0,1,0)), shootRotation);
+        projectile.GetComponent<Rigidbody>().velocity = direction * ProjectileSpeed;
+        projectile.GetComponent<ProjectileAttack>().owningPlayer = owningPlayer;
+    }
+
     public void PerformRectangularAttack(int owningPlayer, Vector2 position2D, float width, float length, Vector2 direction) {
         // Rectangular Attack
         Vector3 position = new Vector3(position2D.x, 0, position2D.y);
@@ -36,7 +48,7 @@ public class AbilityManager : MonoBehaviour
         Quaternion rotation = Quaternion.AngleAxis(angle / Mathf.PI * 180.0f, new Vector3(0, 1, 0));
 
         // Debug Visualization
-        GameObject effectContainer = Object.Instantiate(DebugRectangularAttackEffectPrefab);
+        GameObject effectContainer = Object.Instantiate(DebugRectangularAttackEffectPrefab, DebugEffectContainer.transform);
         effectContainer.transform.position = position;
         ParticleSystem effect = effectContainer.GetComponentInChildren<ParticleSystem>();
         effect.gameObject.transform.localPosition = attackCenter - position;
@@ -65,7 +77,7 @@ public class AbilityManager : MonoBehaviour
         Vector3 attackCenter = new Vector3(position2D.x, 0, position2D.y);
 
         // Debug Visualization
-        GameObject effectContainer = Object.Instantiate(DebugCircularAttackEffectPrefab);
+        GameObject effectContainer = Object.Instantiate(DebugCircularAttackEffectPrefab, DebugEffectContainer.transform);
         effectContainer.transform.position = attackCenter;
         ParticleSystem effect = effectContainer.GetComponentInChildren<ParticleSystem>();
         ParticleSystem.MainModule main = effect.main;
