@@ -217,6 +217,8 @@ MonoBehaviour:
   moveSpeed: 5
   PlayerIndex: -1
   crosshair: {fileID: 3953877890884344302}
+  Projectile: {fileID: 8417483731998377226, guid: 89197330ae62c5b4d87167d8f533626c, type: 3}
+  ProjectileSpeed: 5
 --- !u!136 &8751489601175405910
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5634501935609011848}
   - component: {fileID: 5634501935609011849}
   - component: {fileID: 5634501935609011850}
+  - component: {fileID: 4690099792642848971}
   m_Layer: 0
   m_Name: Potato
   m_TagString: Untagged
@@ -118,3 +119,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04ba95fdefb8a5444bfb8741da6d36bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4690099792642848971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5634501935609011854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f144702208a4b24a80a17211bad6e94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharacterColor: {r: 0.45098042, g: 0.3137255, b: 0.21568629, a: 1}

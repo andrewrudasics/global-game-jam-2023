@@ -31,6 +31,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "melee",
+                    "type": "Button",
+                    "id": "a9022610-d58f-46b5-b071-875adeb77ddb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -147,7 +156,7 @@
                 {
                     "name": "",
                     "id": "0bbbb600-d424-4834-bf66-79df09ed8159",
-                    "path": "<Keyboard>/#(/)",
+                    "path": "<Keyboard>/#(O)",
                     "interactions": "",
                     "processors": "",
                     "groups": "Player2",
@@ -174,6 +183,83 @@
                     "processors": "",
                     "groups": "Player1",
                     "action": "aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "f0163fc4-09dc-4c1f-949c-ca9e7a330a46",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "aim",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "8cf9d849-4d37-40e2-9ac6-85135768b34c",
+                    "path": "<Keyboard>/#(I)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Player2",
+                    "action": "aim",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "003022a7-ff50-42bf-8e51-8af21d8cac4b",
+                    "path": "<Keyboard>/#(K)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Player2",
+                    "action": "aim",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "5d9979cc-e8dd-4945-9c37-5773f8be9a4d",
+                    "path": "<Keyboard>/#(J)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Player2",
+                    "action": "aim",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "2153d9fe-6c9e-4b6a-abc7-b713a2c7c3c2",
+                    "path": "<Keyboard>/#(L)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Player2",
+                    "action": "aim",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "1fb19525-b754-4779-b3af-4d33d5dfd561",
+                    "path": "<Keyboard>/#(Q)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Player1",
+                    "action": "melee",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f3ed8f36-3521-49f4-abc5-5a1af623ff18",
+                    "path": "<Keyboard>/#(U)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Player2",
+                    "action": "melee",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

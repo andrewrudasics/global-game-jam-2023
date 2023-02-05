@@ -81,24 +81,27 @@ public class PlayerController : MonoBehaviour
         moveAxis = value.Get<Vector2>();
     }
 
-    void OnMelee()
+    void OnShoot()
     {
+<<<<<<< HEAD
         Vector2 playerPosition2D = new Vector2(transform.position.x, transform.position.z);
         Vector2 aimDirection = (mousePosProjected - playerPosition2D).normalized;
         AbilityManager.Instance.PerformRectangularAttack(PlayerIndex, playerPosition2D, 1.0f, 2.0f, aimDirection);
-    }
-
-    void OnShoot()
-    {
+=======
+        
         Vector3 shootDirection = (crosshair.transform.position - transform.position).normalized;
 
         Quaternion shootRotation = Quaternion.FromToRotation(Vector3.right, shootDirection);
 
         GameObject projectile = Instantiate(Projectile, (transform.position + new Vector3(0,1,0)), shootRotation);
         projectile.GetComponent<Rigidbody>().velocity = shootDirection * ProjectileSpeed;
-        
-        Debug.Log("Shoot Pressed");
+        //if (Vector3.Dot(shootDirection, mainCamera.transform.right) < 0)
+        //{
+        //    projectile.GetComponentInChildren<SpriteRenderer>().flipX = true;
+        //}
 
+        Debug.Log("Shoot Pressed");
+>>>>>>> 588fde0 (added projectiles)
     }
 
     void OnAim(InputValue value)
