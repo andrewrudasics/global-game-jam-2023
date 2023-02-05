@@ -99,6 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skin: {fileID: 11400000, guid: 819a28d8e9f1a6045b2864f51b3c7910, type: 2}
   knifeSprite: {fileID: 2800000, guid: 45e3adcd1cb7d5a4db627d49e5355d93, type: 3}
+  dodgeTexture: {fileID: 2800000, guid: 3a6ded8c4bfeba046bd231b36773f9c7, type: 3}
   blockTexture: {fileID: 2800000, guid: 75915047de22cc2498185b4db695cdd7, type: 3}
   lungeTexture: {fileID: 2800000, guid: 66bc324156595b94dadd7a7326af3ff7, type: 3}
 --- !u!1 &7924603085684658898

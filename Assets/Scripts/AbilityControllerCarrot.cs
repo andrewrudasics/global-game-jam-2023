@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AbilityControllerCarrot : AbilityControllerBase
 {
+    private float dodgeSpeed = 10.0f;
+
     // Dodge Roll
     public override void UseAbility1() {
         if (abilityRecoveryTimes[0] > 0) {
@@ -12,6 +14,14 @@ public class AbilityControllerCarrot : AbilityControllerBase
         abilityRecoveryTimes[0] = abilityCooldownsS[0];
 
         // TODO: Implement Me
+        PlayerController player = GetPlayerController();
+        Vector2 cursorPos = player.GetProjectedCursorPosition();
+        Vector2 playerPos2D = new Vector2(player.gameObject.transform.position.x, player.gameObject.transform.position.z);
+        Vector3 dodgeDir = new Vector3();
+        dodgeDir.x = playerPos2D.x - cursorPos.x;
+        dodgeDir.z = playerPos2D.y - cursorPos.y;
+
+        player.gameObject.GetComponent<Rigidbody>().AddForce(dodgeSpeed * dodgeDir, ForceMode.Impulse);
     } 
     // Carrot Rain
     public override void UseAbility2() {
@@ -44,7 +54,7 @@ public class AbilityControllerCarrot : AbilityControllerBase
     }
 
     void Start() {
-        abilityCooldownsS[0] = 2.0f;
+        abilityCooldownsS[0] = 4.0f;
         abilityCooldownsS[1] = 2.0f;
         abilityCooldownsS[2] = 2.0f;
         abilityCooldownsS[3] = 2.0f;

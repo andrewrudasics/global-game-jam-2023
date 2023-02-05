@@ -7,6 +7,7 @@ public class SkillHUD : MonoBehaviour
 {
     public GUISkin skin;
     public Texture2D knifeSprite;
+    public Texture2D dodgeTexture;
     public Texture2D blockTexture;
     public Texture2D lungeTexture;
 
@@ -106,7 +107,7 @@ public class SkillHUD : MonoBehaviour
 
     void GUILayoutCarrotAbilities(PlayerController player) {
         GUILayout.FlexibleSpace();
-        GUILayoutAbility(player, "Dodge", 0);
+        GUILayoutAbility(player, "Dodge", 0, dodgeTexture);
         GUILayout.FlexibleSpace();
         GUILayoutAbility(player, "Rain", 1);
         GUILayout.FlexibleSpace();

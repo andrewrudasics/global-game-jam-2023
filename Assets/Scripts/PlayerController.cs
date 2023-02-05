@@ -132,6 +132,9 @@ public class PlayerController : MonoBehaviour
             float modifiedMovementSpeed = IsSlowed ? moveSpeed * 0.3f : moveSpeed;
             rb.MovePosition(transform.position + (moveDir * modifiedMovementSpeed * Time.deltaTime));
         }
+
+        if (anim != null)
+            anim.SetFloat("speed", rb.velocity.magnitude);
     }
 
     // [Important] Gameplay Actions
