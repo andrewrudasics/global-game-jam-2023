@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -556,74 +556,6 @@ PrefabInstance:
       propertyPath: SplashScreenCamera
       value: 
       objectReference: {fileID: 727174301}
-    - target: {fileID: 4091370335329157380, guid: 55e4feb293cb7594cafbc9b35f52a0b2, type: 3}
-      propertyPath: StartingMatchStatus
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4091370335329157381, guid: 55e4feb293cb7594cafbc9b35f52a0b2, type: 3}
-      propertyPath: joinTexture
-      value: 
-      objectReference: {fileID: 2800000, guid: 6109ebccfea34504c84d5e05e409a7b0, type: 3}
-    - target: {fileID: 4091370335329157381, guid: 55e4feb293cb7594cafbc9b35f52a0b2, type: 3}
-      propertyPath: quitTexture
-      value: 
-      objectReference: {fileID: 2800000, guid: 6438ea1f3a83db74d9230faa986d6a52, type: 3}
-    - target: {fileID: 4091370335329157381, guid: 55e4feb293cb7594cafbc9b35f52a0b2, type: 3}
-      propertyPath: p1WinTexture
-      value: 
-      objectReference: {fileID: 2800000, guid: 0398521b70d1f7c4ba16f979283acd3f, type: 3}
-    - target: {fileID: 4091370335329157381, guid: 55e4feb293cb7594cafbc9b35f52a0b2, type: 3}
-      propertyPath: p2WinTexture
-      value: 
-      objectReference: {fileID: 2800000, guid: eda1d416458db074e8e8ae077b22381b, type: 3}
-    - target: {fileID: 4091370335329157381, guid: 55e4feb293cb7594cafbc9b35f52a0b2, type: 3}
-      propertyPath: startTexture
-      value: 
-      objectReference: {fileID: 2800000, guid: 57c0b4375fdb27c4abf23642c79612be, type: 3}
-    - target: {fileID: 4091370335329157381, guid: 55e4feb293cb7594cafbc9b35f52a0b2, type: 3}
-      propertyPath: titleTexture
-      value: 
-      objectReference: {fileID: 2800000, guid: fad0da8fb95c2ee4793591cd07783426, type: 3}
-    - target: {fileID: 4091370335329157381, guid: 55e4feb293cb7594cafbc9b35f52a0b2, type: 3}
-      propertyPath: creditsTexture
-      value: 
-      objectReference: {fileID: 2800000, guid: 9b1e90aa7b1a80244b79694472db5d8b, type: 3}
-    - target: {fileID: 4091370335329157381, guid: 55e4feb293cb7594cafbc9b35f52a0b2, type: 3}
-      propertyPath: gameOverTexture
-      value: 
-      objectReference: {fileID: 2800000, guid: f917826a9c4dc2342894faea73ab3c0b, type: 3}
-    - target: {fileID: 4091370335329157381, guid: 55e4feb293cb7594cafbc9b35f52a0b2, type: 3}
-      propertyPath: selectorTexture
-      value: 
-      objectReference: {fileID: 2800000, guid: b407a67509f56ec47bafb63933382585, type: 3}
-    - target: {fileID: 4091370335329157381, guid: 55e4feb293cb7594cafbc9b35f52a0b2, type: 3}
-      propertyPath: arrowLeftTexture
-      value: 
-      objectReference: {fileID: 2800000, guid: 34f33d327333a5f4482ff9541317af28, type: 3}
-    - target: {fileID: 4091370335329157381, guid: 55e4feb293cb7594cafbc9b35f52a0b2, type: 3}
-      propertyPath: playagainTexture
-      value: 
-      objectReference: {fileID: 2800000, guid: ceb091edefb47534ead4a971cd5ead79, type: 3}
-    - target: {fileID: 4091370335329157381, guid: 55e4feb293cb7594cafbc9b35f52a0b2, type: 3}
-      propertyPath: arrowRightTexture
-      value: 
-      objectReference: {fileID: 2800000, guid: 0208067d44b86d64c8f3be98a7b2028a, type: 3}
-    - target: {fileID: 4091370335329157381, guid: 55e4feb293cb7594cafbc9b35f52a0b2, type: 3}
-      propertyPath: charSelectTexture
-      value: 
-      objectReference: {fileID: 2800000, guid: ab6667f7addde4549becd366e2fb930d, type: 3}
-    - target: {fileID: 4091370335329157381, guid: 55e4feb293cb7594cafbc9b35f52a0b2, type: 3}
-      propertyPath: carrotStatsTexture
-      value: 
-      objectReference: {fileID: 2800000, guid: 6836f6fa06b2cc642ac5e4aaee832432, type: 3}
-    - target: {fileID: 4091370335329157381, guid: 55e4feb293cb7594cafbc9b35f52a0b2, type: 3}
-      propertyPath: potatoStatsTexture
-      value: 
-      objectReference: {fileID: 2800000, guid: 40aeadae04066de4790eebc528e6b343, type: 3}
-    - target: {fileID: 4091370335329157381, guid: 55e4feb293cb7594cafbc9b35f52a0b2, type: 3}
-      propertyPath: startMatchPromptTexture
-      value: 
-      objectReference: {fileID: 2800000, guid: 4c3c5cd7af041f54da2b4ab35741c7b6, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55e4feb293cb7594cafbc9b35f52a0b2, type: 3}
 --- !u!4 &822168964 stripped
@@ -1244,19 +1176,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1562090846045377885, guid: bf22d5b1a540eeb41bdedfe9ca12c754, type: 3}
   m_PrefabInstance: {fileID: 7336224285496724942}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &1943658385
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1943658381}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 19.999998, y: 1.5315661, z: 27.888718}
-  m_Center: {x: 0, y: 0.00000011920929, z: 0}
 --- !u!1001 &4777950971508733066
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1264,22 +1183,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1562203677}
     m_Modifications:
-    - target: {fileID: 4777950972886187377, guid: 39c2678eef0731b4880c018a266ceba5, type: 3}
-      propertyPath: orthographic size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4777950972886187382, guid: 39c2678eef0731b4880c018a266ceba5, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4777950972886187382, guid: 39c2678eef0731b4880c018a266ceba5, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4777950972886187382, guid: 39c2678eef0731b4880c018a266ceba5, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -20
-      objectReference: {fileID: 0}
     - target: {fileID: 4777950973141064848, guid: 39c2678eef0731b4880c018a266ceba5, type: 3}
       propertyPath: m_Name
       value: CameraContainer
@@ -1387,24 +1290,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16d4f3761a0241a45bc5b89bbe560416, type: 3}
---- !u!1 &7273419330225792415 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2203326039579171016, guid: 04d782bbe8cb4254aaa14f54697299fc, type: 3}
-  m_PrefabInstance: {fileID: 8819078328925125975}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &7273419330225792416
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7273419330225792415}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 20, y: 1.5315661, z: 27.88872}
-  m_Center: {x: 0, y: 0.00000011920929, z: 0}
 --- !u!1001 &7336224285496724942
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1415,10 +1300,6 @@ PrefabInstance:
     - target: {fileID: 1562090846045377885, guid: bf22d5b1a540eeb41bdedfe9ca12c754, type: 3}
       propertyPath: m_RootOrder
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1562090846045377885, guid: bf22d5b1a540eeb41bdedfe9ca12c754, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 1562090846045377885, guid: bf22d5b1a540eeb41bdedfe9ca12c754, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1464,10 +1345,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CuttingBoardSmall
       objectReference: {fileID: 0}
-    - target: {fileID: 7483170720175094514, guid: bf22d5b1a540eeb41bdedfe9ca12c754, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf22d5b1a540eeb41bdedfe9ca12c754, type: 3}
 --- !u!1001 &8819078328925125975
@@ -1477,10 +1354,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2203326039579171016, guid: 04d782bbe8cb4254aaa14f54697299fc, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 8548607051847297983, guid: 04d782bbe8cb4254aaa14f54697299fc, type: 3}
       propertyPath: m_Name
       value: Kitchen
