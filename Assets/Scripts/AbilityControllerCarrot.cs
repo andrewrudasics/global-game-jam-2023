@@ -58,7 +58,7 @@ public class AbilityControllerCarrot : AbilityControllerBase
 
     void Start() {
         abilityCooldownsS[0] = 4.0f;
-        abilityCooldownsS[1] = 2.0f;
+        abilityCooldownsS[1] = 5.0f;
         abilityCooldownsS[2] = 2.0f;
         abilityCooldownsS[3] = 2.0f;
     }

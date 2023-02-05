@@ -10,6 +10,7 @@ public class SkillHUD : MonoBehaviour
     public Texture2D dodgeTexture;
     public Texture2D blockTexture;
     public Texture2D lungeTexture;
+    public Texture2D carrotRainTexture;
 
     void OnGUI()
     {
@@ -109,7 +110,7 @@ public class SkillHUD : MonoBehaviour
         GUILayout.FlexibleSpace();
         GUILayoutAbility(player, "Dodge", 0, dodgeTexture);
         GUILayout.FlexibleSpace();
-        GUILayoutAbility(player, "Rain", 1);
+        GUILayoutAbility(player, "Rain", 1, carrotRainTexture);
         GUILayout.FlexibleSpace();
         GUILayoutAbility(player, "Spikes", 2);
         GUILayout.FlexibleSpace();
