@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5.0f;
     public int PlayerIndex = -1;
 
-    private Vector2 moveAxis, mousePos;
+    private Vector2 moveAxis, mousePosScreenSpace, mousePosProjected;
     private Camera mainCamera;
     private Rigidbody rb;
     
@@ -31,13 +31,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         // Crosshair Position
-        Ray aim = mainCamera.ScreenPointToRay(mousePos);
-        RaycastHit hit;
-        
-        if (Physics.Raycast(aim, out hit, 1000, FloorLayer))
-        {
-            crosshair.transform.position = hit.point;
-        }
+        crosshair.transform.position = new Vector3(mousePosProjected.x, 0.01f, mousePosProjected.y);
 
         // Player Movement
         Vector3 camDir = mainCamera.transform.forward;
@@ -82,12 +76,21 @@ public class PlayerController : MonoBehaviour
 
     void OnShoot()
     {
-        Debug.Log("Shoot Pressed");
+        Vector2 playerPosition2D = new Vector2(transform.position.x, transform.position.z);
+        Vector2 aimDirection = (mousePosProjected - playerPosition2D).normalized;
+        AbilityManager.Instance.PerformRectangularAttack(PlayerIndex, playerPosition2D, 1.0f, 2.0f, aimDirection);
     }
 
     void OnAim(InputValue value)
     {
-        mousePos = value.Get<Vector2>();
+        mousePosScreenSpace = value.Get<Vector2>();
+
+        // Project mousePosScreenSpace onto the level surface
+        Ray aim = mainCamera.ScreenPointToRay(mousePosScreenSpace);
+        RaycastHit hit;
+        if (Physics.Raycast(aim, out hit, 1000, FloorLayer)) {
+            mousePosProjected = new Vector2(hit.point.x, hit.point.z);
+        }
     }
 
     // [Important] Menu Actions

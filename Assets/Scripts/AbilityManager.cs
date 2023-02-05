@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class AbilityManager : MonoBehaviour
 {
     private static AbilityManager _instance;
+    public GameObject DebugEffectContainer;
     public GameObject DebugRectangularAttackVisualObjectPrefab;
     private GameObject debugRectangularAttackVisualObject;
 
@@ -26,22 +27,23 @@ public class AbilityManager : MonoBehaviour
             _instance = this;
         }
 
-        debugRectangularAttackVisualObject = Object.Instantiate(DebugRectangularAttackVisualObjectPrefab);
+        debugRectangularAttackVisualObject = Object.Instantiate(DebugRectangularAttackVisualObjectPrefab, DebugEffectContainer.transform);
     }
 
-    public void PerformRectangularAttack(Vector2 position, float width, float length, Vector2 direction) {
+    public void PerformRectangularAttack(int owningPlayer, Vector2 position2D, float width, float length, Vector2 direction) {
         // Rectangular Attack
         // Attack Width: 
         // Attack Length:
         // Attack Direction:
-        Vector2 attackCenter2D = position + width * direction;
+        Vector3 position = new Vector3(position2D.x, 0, position2D.y);
+        Vector2 attackCenter2D = position2D + (length / 2) * direction;
         Vector3 attackCenter = new Vector3(attackCenter2D.x, 0, attackCenter2D.y);
-        float angle = Mathf.Atan2(direction.y, direction.x);
-        Debug.Log(angle);
-        Quaternion rotation = Quaternion.AngleAxis(angle, new Vector3(0, 1, 0));
+        float angle = Mathf.Atan2(direction.x, direction.y) + Mathf.PI / 2.0f;
+        Quaternion rotation = Quaternion.AngleAxis(angle / Mathf.PI * 180.0f, new Vector3(0, 1, 0));
 
         // Debug Visualization
-        debugRectangularAttackVisualObject.transform.position = attackCenter;
+        DebugEffectContainer.transform.position = position;
+        debugRectangularAttackVisualObject.transform.localPosition = attackCenter - position;
         debugRectangularAttackVisualObject.transform.rotation = rotation;
         ParticleSystem debugParticleSystem = debugRectangularAttackVisualObject.GetComponent<ParticleSystem>();
         ParticleSystem.MainModule main = debugParticleSystem.main;
@@ -52,13 +54,14 @@ public class AbilityManager : MonoBehaviour
         // Perform hit detection
         Collider[] hitColliders = Physics.OverlapBox(attackCenter, new Vector3(length / 2, 0.1f, width / 2), rotation, Physics.AllLayers);
         foreach (Collider collider in hitColliders) {
-            // TODO: Replace with actual player controller
-            DummyPlayerController playerController = collider.gameObject.GetComponent<DummyPlayerController>();
+            PlayerController playerController = collider.gameObject.GetComponent<PlayerController>();
             if (playerController == null) {
                 continue;
             }
             int playerIndex = playerController.PlayerIndex;
-            Debug.Log("Player Hit: " + playerIndex);
+            if (playerIndex != owningPlayer) {
+                Debug.Log("Player Hit: " + playerIndex);
+            }
         }
     }
 }
