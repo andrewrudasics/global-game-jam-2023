@@ -35,18 +35,18 @@ public class AbilityControllerPotato : AbilityControllerBase
         Vector2 cursorPosProjected = player.GetProjectedCursorPosition();
         Vector2 playerPosition2D = new Vector2(transform.position.x, transform.position.z);
         Vector2 aimDirection = (cursorPosProjected - playerPosition2D).normalized; 
-        Transform parent = transform.parent;
-        // GameObject potatoSprite = GetAnimator().gameObject;
-        GameObject attackObject = AbilityManager.Instance.PerformProjectileAttack(player.PlayerIndex, playerPosition2D, aimDirection, 0.4f, 15, 0.5f, 0.01f, (GameObject hitPlayer) => {
+        Transform playerTransform = transform.parent; // Player object
+        GameObject potatoSprite = GetAnimator().gameObject;
+        GameObject attackObject = AbilityManager.Instance.PerformProjectileAttack(player.PlayerIndex, playerPosition2D, aimDirection, 0.4f, 15, 0.75f, 0.01f, (GameObject hitPlayer) => {
             if (hitPlayer) {
                 hitPlayer.GetComponent<PlayerController>().SetSlowStatus(1);
             }
-            parent.transform.position = transform.position;
-            transform.SetParent(parent, false);
+            playerTransform.position = potatoSprite.transform.parent.position;
+            potatoSprite.transform.SetParent(transform, false);
             GetAnimator().SetBool("lunging", false);
             player.IsRooted = false;
         });
-        transform.SetParent(attackObject.transform, false);
+        potatoSprite.transform.SetParent(attackObject.transform, false);
     }
     // Leap
     public override void UseAbility3() {
@@ -57,7 +57,7 @@ public class AbilityControllerPotato : AbilityControllerBase
 
         // TODO: Implement Me
     }
-    // Pound
+    // Shockwave
     public override void UseAbility4() {
         if (abilityRecoveryTimes[3] > 0) {
             return;
