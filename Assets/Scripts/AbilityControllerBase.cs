@@ -33,7 +33,7 @@ public abstract class AbilityControllerBase : MonoBehaviour
         Vector2 cursorPosProjected = player.GetProjectedCursorPosition();
         Vector2 playerPosition2D = new Vector2(transform.position.x, transform.position.z);
         Vector2 aimDirection = (cursorPosProjected - playerPosition2D).normalized;
-        AbilityManager.Instance.PerformRectangularAttack(player.PlayerIndex, playerPosition2D, 1.0f, 2.0f, aimDirection);
+        AbilityManager.Instance.PerformRectangularAttack(player.PlayerIndex, playerPosition2D, 1.0f, 2.0f, aimDirection, 10);
     }
     public virtual void AttackRanged() {
         if (ProjectileCount <= 0) {

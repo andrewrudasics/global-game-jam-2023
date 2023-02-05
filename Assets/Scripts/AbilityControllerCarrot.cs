@@ -22,7 +22,7 @@ public class AbilityControllerCarrot : AbilityControllerBase
 
         PlayerController player = GetPlayerController();
         Vector2 cursorPos = player.GetProjectedCursorPosition();        
-        AbilityManager.Instance.PerformCircularAttack(player.PlayerIndex, cursorPos, 1.0f);
+        AbilityManager.Instance.PerformCircularDamageFieldAttack(player.PlayerIndex, cursorPos, 1.0f, 5);
     }
     // ???
     public override void UseAbility3() {

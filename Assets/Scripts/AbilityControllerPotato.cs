@@ -32,7 +32,7 @@ public class AbilityControllerPotato : AbilityControllerBase
         // The projectile should basically every frame just check collision
         PlayerController player = GetPlayerController();
         Vector2 cursorPos = player.GetProjectedCursorPosition();        
-        AbilityManager.Instance.PerformCircularAttack(player.PlayerIndex, cursorPos, 1.0f);
+        AbilityManager.Instance.PerformCircularAttack(player.PlayerIndex, cursorPos, 1.0f, 10);
     }
     // Leap
     public override void UseAbility3() {

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5836464314221876870}
   - component: {fileID: 5836464314221876864}
   - component: {fileID: 6346953090233936159}
-  - component: {fileID: 8586116193448935298}
+  - component: {fileID: -1688101695083355721}
   m_Layer: 0
   m_Name: Carrot
   m_TagString: Untagged
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharacterColor: {r: 0.9568628, g: 0.5882353, b: 0.3019608, a: 1}
---- !u!114 &8586116193448935298
+--- !u!114 &-1688101695083355721
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,9 +142,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5836464314221876868}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80b47f003da25a845a03af7130f1d137, type: 3}
+  m_Script: {fileID: 11500000, guid: a534358859d20334fa5b168a2eb54b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxProjectiles: 5
   ProjectileCount: 5
-  ProjectileCooldownS: 1

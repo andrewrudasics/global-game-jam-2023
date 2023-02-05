@@ -8,9 +8,11 @@ public class AbilityManager : MonoBehaviour
     private static AbilityManager _instance;
     public GameObject ProjectilePrefab;
     public float ProjectileSpeed = 5;
+    public GameObject AttacksContainer;
     public GameObject DebugEffectContainer;
     public GameObject DebugRectangularAttackEffectPrefab;
     public GameObject DebugCircularAttackEffectPrefab;
+    public GameObject CircularDamageFieldPrefab;
 
     // Define attack:
     // - Collider Shape
@@ -30,8 +32,19 @@ public class AbilityManager : MonoBehaviour
         }
     }
 
+    public void PerformCircularDamageFieldAttack(int owningPlayer, Vector2 position2D, float radius, float tickDamage) {
+        GameObject attackObject = Object.Instantiate(CircularDamageFieldPrefab, AttacksContainer.transform);
+        AttackCircularDamageField atk = attackObject.GetComponent<AttackCircularDamageField>();
+        atk.OwningPlayer = owningPlayer;
+        atk.AttackDurationS = 5;
+        atk.TickPeriodS = 0.5f;
+        atk.Position2D = position2D;
+        atk.Radius = radius;
+        atk.TickDamage = tickDamage;
+    }
+
     public void PerformProjectileAttack(int owningPlayer) {
-        
+
     }
 
     public void PerformRangedAttack(int owningPlayer, Vector2 position2D, Vector2 direction2D) {
@@ -43,7 +56,7 @@ public class AbilityManager : MonoBehaviour
         projectile.GetComponent<ProjectileAttack>().owningPlayer = owningPlayer;
     }
 
-    public void PerformRectangularAttack(int owningPlayer, Vector2 position2D, float width, float length, Vector2 direction) {
+    public void PerformRectangularAttack(int owningPlayer, Vector2 position2D, float width, float length, Vector2 direction, float damage) {
         // Rectangular Attack
         Vector3 position = new Vector3(position2D.x, 0, position2D.y);
         Vector2 attackCenter2D = position2D + (length / 2) * direction;
@@ -71,13 +84,12 @@ public class AbilityManager : MonoBehaviour
             }
             int playerIndex = playerController.PlayerIndex;
             if (playerIndex != owningPlayer) {
-                Debug.Log("Player Hit: " + playerIndex);
-                HealthBarManager.Instance.DamagePlayer(playerIndex, 10);
+                HealthBarManager.Instance.DamagePlayer(playerIndex, (int)ComputeDamageOnPlayer(playerController, damage));
             }
         }
     }
 
-    public void PerformCircularAttack(int owningPlayer, Vector2 position2D, float radius) {
+    public void PerformCircularAttack(int owningPlayer, Vector2 position2D, float radius, float damage) {
         Vector3 attackCenter = new Vector3(position2D.x, 0, position2D.y);
 
         // Debug Visualization
@@ -98,9 +110,16 @@ public class AbilityManager : MonoBehaviour
             }
             int playerIndex = playerController.PlayerIndex;
             if (playerIndex != owningPlayer) {
-                Debug.Log("Player Hit: " + playerIndex);
-                HealthBarManager.Instance.DamagePlayer(playerIndex, 10);
+                HealthBarManager.Instance.DamagePlayer(playerIndex, (int)ComputeDamageOnPlayer(playerController, damage));
             }
         }
+    }
+
+    public float ComputeDamageOnPlayer(PlayerController player, float damage) {
+        if (player.IsBlocking) {
+            damage = Mathf.Ceil(damage / 5);
+        }
+
+        return damage;
     }
 }

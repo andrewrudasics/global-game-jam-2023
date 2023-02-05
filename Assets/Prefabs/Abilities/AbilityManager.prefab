@@ -62,6 +62,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1186911819344964186}
+  - {fileID: 7540039831179835319}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -79,9 +80,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ProjectilePrefab: {fileID: 8417483731998377226, guid: 89197330ae62c5b4d87167d8f533626c, type: 3}
   ProjectileSpeed: 5
+  AttacksContainer: {fileID: 7924603085684658898}
   DebugEffectContainer: {fileID: 1186911819344964181}
   DebugRectangularAttackEffectPrefab: {fileID: 6937053446108078698, guid: 968d30ce6d7d60d4a85bb4ca4d987fa6, type: 3}
   DebugCircularAttackEffectPrefab: {fileID: 7565541245409818357, guid: f39fa253638106b4f948b82f5c7057ab, type: 3}
+  CircularDamageFieldPrefab: {fileID: 1672813848782109356, guid: a8ed18ca1975b6045a43c83711d5b9b4, type: 3}
 --- !u!114 &11179879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,3 +99,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skin: {fileID: 11400000, guid: 819a28d8e9f1a6045b2864f51b3c7910, type: 2}
   knifeSprite: {fileID: 2800000, guid: 45e3adcd1cb7d5a4db627d49e5355d93, type: 3}
+--- !u!1 &7924603085684658898
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7540039831179835319}
+  m_Layer: 0
+  m_Name: AttacksContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7540039831179835319
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7924603085684658898}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1728406466111167818}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

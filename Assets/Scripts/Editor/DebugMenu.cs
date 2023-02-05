@@ -7,6 +7,6 @@ public class DebugMenu : MonoBehaviour
     [MenuItem("Debug / Perform Rectangular Attack")]
     static void DoSomething()
     {
-        AbilityManager.Instance.PerformRectangularAttack(0, new Vector2(0, 0), 1, 2, new Vector2(1, 0));
+        AbilityManager.Instance.PerformRectangularAttack(0, new Vector2(0, 0), 1, 2, new Vector2(1, 0), 10);
     }
 }
