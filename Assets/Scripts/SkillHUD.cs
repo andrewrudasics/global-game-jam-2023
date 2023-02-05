@@ -53,7 +53,7 @@ public class SkillHUD : MonoBehaviour
                 GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
             // Skills
-            GUILayout.BeginHorizontal(UnityEditor.EditorStyles.helpBox);
+            GUILayout.BeginHorizontal();
                 if (player.SelectedCharacter == 0) {
                     GUILayoutPotatoAbilities(player);
                 } else {

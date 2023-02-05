@@ -4,6 +4,9 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/arena_prototype.unity
+    guid: ce5a50854a623f34ebaba79c0ed569bd
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 7af8b01f51d89b54a9535eaa0cec374d, type: 2}
