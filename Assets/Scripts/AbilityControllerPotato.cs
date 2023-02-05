@@ -12,8 +12,8 @@ public class AbilityControllerPotato : AbilityControllerBase
     public override void UseAbility2() {
         // TODO: Implement Me
         PlayerController player = GetPlayerController();
-        Vector2 mousePosProjected = player.GetProjectedMousePosition();        
-        AbilityManager.Instance.PerformCircularAttack(player.PlayerIndex, mousePosProjected, 1.0f);
+        Vector2 cursorPos = player.GetProjectedCursorPosition();        
+        AbilityManager.Instance.PerformCircularAttack(player.PlayerIndex, cursorPos, 1.0f);
     }
     // ???
     public override void UseAbility3() {

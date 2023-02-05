@@ -5,13 +5,15 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    [HideInInspector]
+    public InputDevice Device;
     private static readonly int FloorLayer = 1 << 8;
 
     public float moveSpeed = 5.0f;
     public int PlayerIndex = -1;
     public int SelectedCharacter = -1;
 
-    private Vector2 moveAxis, mousePosScreenSpace, mousePosProjected;
+    private Vector2 moveAxis, lookAxis, mousePosScreenSpace, mousePosProjected;
     private Camera mainCamera;
     private Rigidbody rb;
     
@@ -25,8 +27,8 @@ public class PlayerController : MonoBehaviour
     public float ProjectileSpeed = 5;
     public int ProjectileCount = 5;
 
-    public Vector2 GetProjectedMousePosition() {
-        return mousePosProjected;
+    public Vector2 GetProjectedCursorPosition() {
+        return new Vector2(crosshair.transform.position.x, crosshair.transform.position.z);
     }
 
     public AbilityControllerBase GetAbilityController() {
@@ -37,6 +39,7 @@ public class PlayerController : MonoBehaviour
     {
         mainCamera = Camera.main;
         rb = gameObject.GetComponent<Rigidbody>();
+        lookAxis = new Vector2(1, 0);
     }
 
     // Update is called once per frame
@@ -47,7 +50,13 @@ public class PlayerController : MonoBehaviour
         }
 
         // Crosshair Position
-        crosshair.transform.position = new Vector3(mousePosProjected.x, 0.01f, mousePosProjected.y);
+        if (Device is Gamepad) {
+            Vector2 offsetPosition = lookAxis.normalized * 1.5f;
+            crosshair.transform.position = transform.position + (new Vector3(offsetPosition.x, 0.01f, offsetPosition.y));
+        } else {
+            crosshair.transform.position = new Vector3(mousePosProjected.x, 0.01f, mousePosProjected.y);
+        }
+        
 
         SetCrosshairColor();
 
@@ -118,21 +127,23 @@ public class PlayerController : MonoBehaviour
 
     void OnAim(InputValue value)
     {
-        mousePosScreenSpace = value.Get<Vector2>();
-
-        // Project mousePosScreenSpace onto the level surface
-        Ray aim = mainCamera.ScreenPointToRay(mousePosScreenSpace);
-        RaycastHit hit;
-        if (Physics.Raycast(aim, out hit, 1000, FloorLayer)) {
-            mousePosProjected = new Vector2(hit.point.x, hit.point.z);
+        if (Device is Gamepad) {
+            Vector2 _value = value.Get<Vector2>();
+            if (_value.magnitude > 0.1f) {
+                lookAxis = _value;
+            }
+        } else {
+            // Project mousePosScreenSpace onto the level surface
+            mousePosScreenSpace = value.Get<Vector2>();
+            Ray aim = mainCamera.ScreenPointToRay(mousePosScreenSpace);
+            RaycastHit hit;
+            if (Physics.Raycast(aim, out hit, 1000, FloorLayer)) {
+                mousePosProjected = new Vector2(hit.point.x, hit.point.z);
+            }
         }
     }
 
     // [Important] Menu Actions
-    void OnJoin()
-    {
-        PlayerManager.Instance.JoinPlayer(PlayerIndex);
-    }
     void OnLeft()
     {
         GameMenu.Instance.OnLeft(PlayerIndex);

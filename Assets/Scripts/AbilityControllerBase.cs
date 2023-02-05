@@ -21,9 +21,9 @@ public abstract class AbilityControllerBase : MonoBehaviour
     public abstract float GetAbilityCooldown(int abilityIndex);
     public virtual void AttackMelee() { 
         PlayerController player = GetPlayerController();
-        Vector2 mousePosProjected = player.GetProjectedMousePosition();        
+        Vector2 cursorPosProjected = player.GetProjectedCursorPosition();
         Vector2 playerPosition2D = new Vector2(transform.position.x, transform.position.z);
-        Vector2 aimDirection = (mousePosProjected - playerPosition2D).normalized;
+        Vector2 aimDirection = (cursorPosProjected - playerPosition2D).normalized;
         AbilityManager.Instance.PerformRectangularAttack(player.PlayerIndex, playerPosition2D, 1.0f, 2.0f, aimDirection);
     }
     public virtual void AttackRanged() {
@@ -34,9 +34,9 @@ public abstract class AbilityControllerBase : MonoBehaviour
         ProjectileCount -= 1;
 
         PlayerController player = GetPlayerController();
-        Vector2 mousePosProjected = player.GetProjectedMousePosition();
+        Vector2 cursorPosProjected = player.GetProjectedCursorPosition();
         Vector2 playerPosition2D = new Vector2(transform.position.x, transform.position.z);
-        Vector2 aimDirection = (mousePosProjected - playerPosition2D).normalized;
+        Vector2 aimDirection = (cursorPosProjected - playerPosition2D).normalized;
         AbilityManager.Instance.PerformRangedAttack(player.PlayerIndex, playerPosition2D, aimDirection);
     }
 

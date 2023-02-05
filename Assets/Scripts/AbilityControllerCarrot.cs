@@ -11,8 +11,8 @@ public class AbilityControllerCarrot : AbilityControllerBase
     // Carrot Rain
     public override void UseAbility2() {
         PlayerController player = GetPlayerController();
-        Vector2 mousePosProjected = player.GetProjectedMousePosition();        
-        AbilityManager.Instance.PerformCircularAttack(player.PlayerIndex, mousePosProjected, 1.0f);
+        Vector2 cursorPos = player.GetProjectedCursorPosition();        
+        AbilityManager.Instance.PerformCircularAttack(player.PlayerIndex, cursorPos, 1.0f);
     }
     // ???
     public override void UseAbility3() {
