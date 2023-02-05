@@ -18,11 +18,13 @@ public class PlayerController : MonoBehaviour
     {
         get { return _isBlocking; }
         set {
-            _isBlocking = value ;
-            IsRooted = value ;
+            _isBlocking = value;
+            IsRooted = value;
+            IsUsingAbility = value;
         }
     }
     public bool IsRooted { get; set; }
+    public bool IsUsingAbility { get; set; }
     private float rootedDuration = 0;
     public bool IsSlowed { get; set; }
     private float slowedDuration = 0;
@@ -67,10 +69,11 @@ public class PlayerController : MonoBehaviour
     }
 
     void Update() {
-        if (IsRooted) {
+        if (IsRooted && rootedDuration > 0) {
             rootedDuration -= Time.deltaTime;
             if (rootedDuration < 0) {
                 IsRooted = false;
+                rootedDuration = -1;
             }
         }
 
@@ -111,6 +114,8 @@ public class PlayerController : MonoBehaviour
         Vector3 camRight = Vector3.Cross(camForward, mainCamera.transform.up.normalized).normalized;
 
         if (!IsRooted) {
+            Debug.Log("Is ROoted?");
+            Debug.Log(IsRooted);
             if (spriteRenderer != null) {
                 if (moveAxis.x < 0) {
                     spriteRenderer.flipX = false;

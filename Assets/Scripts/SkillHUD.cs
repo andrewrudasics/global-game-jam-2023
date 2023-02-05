@@ -7,6 +7,8 @@ public class SkillHUD : MonoBehaviour
 {
     public GUISkin skin;
     public Texture2D knifeSprite;
+    public Texture2D blockTexture;
+    public Texture2D lungeTexture;
 
     void OnGUI()
     {
@@ -59,7 +61,7 @@ public class SkillHUD : MonoBehaviour
         GUILayout.EndArea();
     }
 
-    void GUILayoutAbility(PlayerController player, string text, int abilityIndex) {
+    void GUILayoutAbility(PlayerController player, string text, int abilityIndex, Texture2D icon = null) {
         const int SIZE = 64;
         const int MARGIN = 4;
         GUIStyle abilityStyle = new GUIStyle(GUI.skin.box);
@@ -67,7 +69,11 @@ public class SkillHUD : MonoBehaviour
         abilityStyle.fixedWidth = SIZE;
         abilityStyle.normal.textColor = Color.white;
         abilityStyle.alignment = TextAnchor.MiddleCenter;
-        GUILayout.Box(text, abilityStyle);
+        if (!icon) {
+            GUILayout.Box(text, abilityStyle);
+        } else {
+            GUILayout.Box(icon, abilityStyle);
+        }
         float cdPercent = player.GetAbilityController().GetAbilityCooledDownPercent(abilityIndex);
         if (cdPercent < 1) {
             float width = Mathf.Ceil(SIZE * cdPercent);
@@ -87,13 +93,13 @@ public class SkillHUD : MonoBehaviour
 
     void GUILayoutPotatoAbilities(PlayerController player) {
         GUILayout.FlexibleSpace();
-        GUILayoutAbility(player, "Block", 0);
+        GUILayoutAbility(player, "Block", 0, blockTexture);
         GUILayout.FlexibleSpace();
-        GUILayoutAbility(player, "Slam", 1);
+        GUILayoutAbility(player, "Slam", 1, lungeTexture);
         GUILayout.FlexibleSpace();
         GUILayoutAbility(player, "Leap", 2);
         GUILayout.FlexibleSpace();
-        GUILayoutAbility(player, "Pound", 3);
+        GUILayoutAbility(player, "Shockwave", 3);
         GUILayout.FlexibleSpace();
     }
 

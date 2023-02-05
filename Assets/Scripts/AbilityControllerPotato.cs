@@ -9,27 +9,27 @@ public class AbilityControllerPotato : AbilityControllerBase
 
     // Block
     public override void UseAbility1() {
-        Debug.Log(abilityRecoveryTimes[0]);
-        if (abilityRecoveryTimes[0] > 0) {
+        PlayerController player = GetPlayerController();
+        if (abilityRecoveryTimes[0] > 0 || player.IsUsingAbility) {
             return;
         }
         abilityRecoveryTimes[0] = abilityCooldownsS[0];
 
         GetAnimator().SetBool("blocking", true);
-        GetPlayerController().IsBlocking = true;
+        player.IsBlocking = true;
         blockTimeLeftS = BlockTimeS;
     } 
     // Lunge
     public override void UseAbility2() {
-        if (abilityRecoveryTimes[1] > 0) {
+        PlayerController player = GetPlayerController();
+        if (abilityRecoveryTimes[1] > 0 || player.IsUsingAbility) {
             return;
         }
         abilityRecoveryTimes[1] = abilityCooldownsS[1];
 
-        PlayerController player = GetPlayerController();
-
         GetAnimator().SetBool("lunging", true);
         player.IsRooted = true;
+        player.IsUsingAbility = true;
 
         // Basically send a projectile where the potato itself is the projectile
         Vector2 cursorPosProjected = player.GetProjectedCursorPosition();
@@ -37,7 +37,7 @@ public class AbilityControllerPotato : AbilityControllerBase
         Vector2 aimDirection = (cursorPosProjected - playerPosition2D).normalized; 
         Transform playerTransform = transform.parent; // Player object
         GameObject potatoSprite = GetAnimator().gameObject;
-        GameObject attackObject = AbilityManager.Instance.PerformProjectileAttack(player.PlayerIndex, playerPosition2D, aimDirection, 0.4f, 15, 0.75f, 0.01f, (GameObject hitPlayer) => {
+        GameObject attackObject = AbilityManager.Instance.PerformProjectileAttack(player.PlayerIndex, playerPosition2D, aimDirection, 0.4f, 15, 0.5f, 0.015f, (GameObject hitPlayer) => {
             if (hitPlayer) {
                 hitPlayer.GetComponent<PlayerController>().SetSlowStatus(1);
             }
@@ -45,12 +45,14 @@ public class AbilityControllerPotato : AbilityControllerBase
             potatoSprite.transform.SetParent(transform, false);
             GetAnimator().SetBool("lunging", false);
             player.IsRooted = false;
+            player.IsUsingAbility = false;
         });
         potatoSprite.transform.SetParent(attackObject.transform, false);
     }
     // Leap
     public override void UseAbility3() {
-        if (abilityRecoveryTimes[2] > 0) {
+        PlayerController player = GetPlayerController();
+        if (abilityRecoveryTimes[2] > 0 || player.IsUsingAbility) {
             return;
         }
         abilityRecoveryTimes[2] = abilityCooldownsS[2];
@@ -59,7 +61,8 @@ public class AbilityControllerPotato : AbilityControllerBase
     }
     // Shockwave
     public override void UseAbility4() {
-        if (abilityRecoveryTimes[3] > 0) {
+        PlayerController player = GetPlayerController();
+        if (abilityRecoveryTimes[3] > 0 || player.IsUsingAbility) {
             return;
         }
         abilityRecoveryTimes[3] = abilityCooldownsS[3];
@@ -68,8 +71,8 @@ public class AbilityControllerPotato : AbilityControllerBase
     }
 
     void Start() {
-        abilityCooldownsS[0] = 2.0f;
-        abilityCooldownsS[1] = 2.0f;
+        abilityCooldownsS[0] = 4.0f;
+        abilityCooldownsS[1] = 6.0f;
         abilityCooldownsS[2] = 2.0f;
         abilityCooldownsS[3] = 2.0f;
     }

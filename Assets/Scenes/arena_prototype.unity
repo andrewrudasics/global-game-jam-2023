@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -135,6 +135,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11179879, guid: 907c56179fa6ca74791a125581a106b3, type: 3}
+      propertyPath: blockTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: 75915047de22cc2498185b4db695cdd7, type: 3}
+    - target: {fileID: 11179879, guid: 907c56179fa6ca74791a125581a106b3, type: 3}
+      propertyPath: lungeTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: 66bc324156595b94dadd7a7326af3ff7, type: 3}
     - target: {fileID: 1728406466111167818, guid: 907c56179fa6ca74791a125581a106b3, type: 3}
       propertyPath: m_RootOrder
       value: 2
