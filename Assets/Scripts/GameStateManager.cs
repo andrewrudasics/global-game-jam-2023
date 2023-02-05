@@ -19,7 +19,7 @@ public class GameStateManager : MonoBehaviour
     public GameObject HealthSystem;
     [HideInInspector]
     public int WinningPlayer = -1;
-
+    public MatchStatus StartingMatchStatus = MatchStatus.SplashScreen;
     private MatchStatus _matchStatus = MatchStatus.SplashScreen;
     public MatchStatus matchStatus {
         get { return _matchStatus; }
@@ -36,6 +36,9 @@ public class GameStateManager : MonoBehaviour
                 GameCamera.SetActive(true);
                 LevelObject.SetActive(true);
                 HealthSystem.SetActive(true);
+            }
+            if (value == MatchStatus.WaitingForPlayers) {
+                PlayerManager.Instance.DespawnPlayers();
             }
             _matchStatus = value;
         }
@@ -55,7 +58,7 @@ public class GameStateManager : MonoBehaviour
             _instance = this;
         }
 
-        matchStatus = MatchStatus.SplashScreen;
+        matchStatus = StartingMatchStatus;
     }
 
     public void StartGame() {
@@ -63,11 +66,6 @@ public class GameStateManager : MonoBehaviour
         matchStatus = MatchStatus.InProgress;
         PlayerManager.Instance.SwitchActionMaps("gameplay");
         HealthBarManager.Instance.ResetHealth();
-    }
-
-    public void CharacterSelect() {
-        PlayerManager.Instance.DespawnPlayers();
-        matchStatus = MatchStatus.WaitingForPlayers;
     }
 
     public void OnPlayerDeath(int playerIndex) {

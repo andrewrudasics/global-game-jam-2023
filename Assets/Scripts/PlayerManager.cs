@@ -117,6 +117,9 @@ public class PlayerManager : MonoBehaviour
 
     public void DespawnPlayers() {
         foreach (PlayerInput input in playerInputs) {
+            if (input == null) {
+                continue;
+            }
             Component component = input.transform.GetComponentInChildren<ColorInfo>();
             if (component) {
                 Destroy(component.gameObject);
