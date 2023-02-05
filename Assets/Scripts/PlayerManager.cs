@@ -73,4 +73,6 @@ public class PlayerManager : MonoBehaviour
 
     void OnPlayerJoined(PlayerInput player) {
     }
+    //checks the health of the player against the number of collisions made
+    
 }
