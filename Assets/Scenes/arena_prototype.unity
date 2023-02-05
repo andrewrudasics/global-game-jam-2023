@@ -257,6 +257,10 @@ PrefabInstance:
       propertyPath: lungeTexture
       value: 
       objectReference: {fileID: 2800000, guid: 66bc324156595b94dadd7a7326af3ff7, type: 3}
+    - target: {fileID: 11179879, guid: 907c56179fa6ca74791a125581a106b3, type: 3}
+      propertyPath: carrotRainTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: 0a1f8d69a563bb74e9f8c4f348a89d1d, type: 3}
     - target: {fileID: 1728406466111167818, guid: 907c56179fa6ca74791a125581a106b3, type: 3}
       propertyPath: m_RootOrder
       value: 2

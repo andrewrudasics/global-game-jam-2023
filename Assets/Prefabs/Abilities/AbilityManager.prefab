@@ -102,6 +102,7 @@ MonoBehaviour:
   dodgeTexture: {fileID: 2800000, guid: 3a6ded8c4bfeba046bd231b36773f9c7, type: 3}
   blockTexture: {fileID: 2800000, guid: 75915047de22cc2498185b4db695cdd7, type: 3}
   lungeTexture: {fileID: 2800000, guid: 66bc324156595b94dadd7a7326af3ff7, type: 3}
+  carrotRainTexture: {fileID: 2800000, guid: 0a1f8d69a563bb74e9f8c4f348a89d1d, type: 3}
 --- !u!1 &7924603085684658898
 GameObject:
   m_ObjectHideFlags: 0
