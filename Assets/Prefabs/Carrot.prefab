@@ -149,3 +149,5 @@ MonoBehaviour:
   ThrowingKnifeP2Prefab: {fileID: 8417483731998377226, guid: 89197330ae62c5b4d87167d8f533626c, type: 3}
   MaxProjectiles: 3
   ProjectileCount: 3
+  MeleeKnifePrefab: {fileID: 6603728705695698653, guid: 7638e1a64279e4546a0c869f612f280e, type: 3}
+  MeleeSweepAngle: 90

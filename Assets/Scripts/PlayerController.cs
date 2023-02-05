@@ -43,6 +43,8 @@ public class PlayerController : MonoBehaviour
     public float ProjectileSpeed = 5;
     public int ProjectileCount = 5;
 
+   
+
     public Vector2 GetProjectedCursorPosition() {
         return new Vector2(crosshair.transform.position.x, crosshair.transform.position.z);
     }
@@ -104,9 +106,6 @@ public class PlayerController : MonoBehaviour
             float angle = Mathf.Atan2(offsetPosition.x, offsetPosition.y) + Mathf.PI / 2.0f;
             crosshair.transform.rotation = Quaternion.AngleAxis(angle / Mathf.PI * 180.0f, new Vector3(0, 1, 0));
         }
-        
-
-        // SetCrosshairColor();
 
         // Player Movement
         Vector3 camDir = mainCamera.transform.forward;

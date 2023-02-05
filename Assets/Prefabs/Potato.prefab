@@ -179,4 +179,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ThrowingKnifeP1Prefab: {fileID: 8417483731998377226, guid: 7f89bbf81130cd144859799a8023a7f1, type: 3}
   ThrowingKnifeP2Prefab: {fileID: 8417483731998377226, guid: 89197330ae62c5b4d87167d8f533626c, type: 3}
+  MaxProjectiles: 3
   ProjectileCount: 3
+  MeleeKnifePrefab: {fileID: 6603728705695698653, guid: 7638e1a64279e4546a0c869f612f280e, type: 3}
+  MeleeSweepAngle: 135
+  MeleeAnimationDuration: 0.3

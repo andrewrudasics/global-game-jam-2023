@@ -10,6 +10,10 @@ public abstract class AbilityControllerBase : MonoBehaviour
     public int ProjectileCount = 3;
     protected float ProjectileCooldownS = 1.0f;
     protected float projectileRecoveryTime; // Time until next projectile is ready
+    public GameObject MeleeKnifePrefab;
+    public float MeleeSweepAngle;
+    protected float MeleeCooldownS = 1.0f;
+    public float MeleeAnimationDuration = 0.5f;
     protected float[] abilityCooldownsS = new float[4];
     protected float[] abilityRecoveryTimes = new float[4]; // 0 means it's ready to use
 
@@ -34,6 +38,15 @@ public abstract class AbilityControllerBase : MonoBehaviour
         Vector2 cursorPosProjected = player.GetProjectedCursorPosition();
         Vector2 playerPosition2D = new Vector2(transform.position.x, transform.position.z);
         Vector2 aimDirection = (cursorPosProjected - playerPosition2D).normalized;
+
+        // Spawn Melee Knife
+        GameObject meleeObject = Instantiate(MeleeKnifePrefab, gameObject.transform);
+        float currentRotation = -1.0f * Vector2.SignedAngle(Vector2.right, aimDirection);
+        float startRotation = currentRotation - (MeleeSweepAngle / 2);
+        float endRotation = currentRotation + (MeleeSweepAngle / 2);
+        StartCoroutine(RotateKnife(meleeObject, startRotation, endRotation, MeleeAnimationDuration));
+
+
         AbilityManager.Instance.PerformRectangularAttack(player.PlayerIndex, playerPosition2D, 1.0f, 2.0f, aimDirection, 10);
     }
     public virtual void AttackRanged() {
@@ -81,5 +94,20 @@ public abstract class AbilityControllerBase : MonoBehaviour
                 projectileRecoveryTime = ProjectileCooldownS;
             }
         }
+    }
+
+    IEnumerator RotateKnife(GameObject knifeObject, float startRotation, float endRotation, float duration)
+    {
+        float t = 0.0f;
+        while(t < duration)
+        {
+            t += Time.deltaTime;
+            float yRotation = Mathf.Lerp(startRotation, endRotation, t / duration); // % 360.0f;
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, yRotation,
+            transform.eulerAngles.z);
+            yield return null;
+        }
+
+        Destroy(knifeObject);
     }
 }
