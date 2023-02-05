@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public enum MatchStatus
 {
+    SplashScreen,
     WaitingForPlayers,
     InProgress,
     Ended,
@@ -12,10 +13,34 @@ public enum MatchStatus
 
 public class GameStateManager : MonoBehaviour
 {
+    public GameObject SplashScreenCamera;
+    public GameObject GameCamera;
+    public GameObject LevelObject;
+    public GameObject HealthSystem;
     [HideInInspector]
     public int WinningPlayer = -1;
 
-    public MatchStatus matchStatus = MatchStatus.WaitingForPlayers;
+    private MatchStatus _matchStatus = MatchStatus.SplashScreen;
+    public MatchStatus matchStatus {
+        get { return _matchStatus; }
+        set {
+            if (value == MatchStatus.SplashScreen) {
+                // Enable Splash Screen Camera
+                SplashScreenCamera.SetActive(true);
+                GameCamera.SetActive(false);
+                LevelObject.SetActive(false);
+                HealthSystem.SetActive(false);
+            } else {
+                // Enable Normal Camera
+                SplashScreenCamera.SetActive(false);
+                GameCamera.SetActive(true);
+                LevelObject.SetActive(true);
+                HealthSystem.SetActive(true);
+            }
+            _matchStatus = value;
+        }
+    }
+    
 
     private static GameStateManager _instance;
 
@@ -29,6 +54,8 @@ public class GameStateManager : MonoBehaviour
         } else {
             _instance = this;
         }
+
+        matchStatus = MatchStatus.SplashScreen;
     }
 
     public void StartGame() {

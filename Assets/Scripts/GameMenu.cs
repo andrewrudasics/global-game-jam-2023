@@ -2,13 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
-
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Utilities;
 public class GameMenu : MonoBehaviour
 {
     private int MatchCountdown = -1;
     public Texture2D carrotPortraitTexture;
     public Texture2D potatoPortraitTexture;
+    public Texture2D titleTexture;
+    public Texture2D startTexture;
+    public Texture2D quitTexture;
+    public Texture2D creditsTexture;
+    public Texture2D selectorTexture;
     bool hasStarted = false;
+
+    private int selectedStartMenuIndex = 0;
 
     private static GameMenu _instance;
 
@@ -28,6 +36,45 @@ public class GameMenu : MonoBehaviour
 
         selectedCharacter[0] = 0;
         selectedCharacter[1] = 1;
+        InputSystem.onAnyButtonPress.Call(OnButtonPressed);
+    }
+
+    void OnButtonPressed(InputControl button)
+    {
+        if (GameStateManager.Instance.matchStatus != MatchStatus.SplashScreen) {
+            return;
+        }
+
+        switch (button.name) {
+            case "w":
+            case "upArrow":
+            case "up":
+                selectedStartMenuIndex -= 1;
+                if (selectedStartMenuIndex < 0) {
+                    selectedStartMenuIndex = 2;
+                }
+                break;
+            case "s":
+            case "downArrow":
+            case "down":
+                selectedStartMenuIndex += 1;
+                if (selectedStartMenuIndex > 2) {
+                    selectedStartMenuIndex = 0;
+                }
+                break;
+            case "start":
+            case "enter":
+            case "space":
+                if (selectedStartMenuIndex == 0) {
+                    GameStateManager.Instance.matchStatus = MatchStatus.WaitingForPlayers;
+                } else if (selectedStartMenuIndex == 1) {
+
+                } else if (selectedStartMenuIndex == 2) {
+                    // Quit Game
+                    Application.Quit();
+                }
+                break;
+        }
     }
 
     public void OnLeft(int playerIndex) {
@@ -55,7 +102,6 @@ public class GameMenu : MonoBehaviour
     }
 
     public async void OnStart(int playerIndex) {
-        Debug.Log("OnStart");
         if (GameStateManager.Instance.matchStatus == MatchStatus.Ended) {
             GameStateManager.Instance.CharacterSelect();
         } else if (GameStateManager.Instance.matchStatus == MatchStatus.WaitingForPlayers) {
@@ -79,6 +125,9 @@ public class GameMenu : MonoBehaviour
     {
         MatchStatus status = GameStateManager.Instance.matchStatus;
         switch (GameStateManager.Instance.matchStatus) {
+            case MatchStatus.SplashScreen:
+                OnGUISplashScreen();
+                break;
             case MatchStatus.WaitingForPlayers:
                 OnGUIWaitingForPlayers();
                 break;
@@ -86,6 +135,55 @@ public class GameMenu : MonoBehaviour
                 OnGUIMatchEnded();
                 break;
         }
+    }
+
+    void GUILayoutDrawSelector() {
+        GUIStyle selectorStyle = new GUIStyle();
+        selectorStyle.imagePosition = ImagePosition.ImageOnly;
+        selectorStyle.fixedHeight = 50;
+        selectorStyle.fixedWidth = 172;
+        GUILayout.Space(12);
+        GUILayout.Box(selectorTexture, selectorStyle);
+    }
+
+    void OnGUISplashScreen() {
+        const int PADDING = 40;
+
+        GUIStyle btnStyle = new GUIStyle();
+        btnStyle.imagePosition = ImagePosition.ImageOnly;
+
+
+        Rect menuRect = new Rect (PADDING, PADDING, Screen.width - 2 * PADDING, Screen.height - 2 * PADDING);
+        GUILayout.BeginArea(menuRect);
+        GUILayout.BeginVertical();
+            btnStyle.fixedHeight = 150;
+            btnStyle.fixedWidth = 563;
+            GUILayout.Box(titleTexture, btnStyle);
+            btnStyle.fixedHeight = 75;
+            btnStyle.fixedWidth = 277;
+            GUILayout.Space(12);
+            GUILayout.BeginHorizontal();
+                GUILayout.Box(startTexture, btnStyle);
+                if (selectedStartMenuIndex == 0) {
+                    GUILayoutDrawSelector();
+                }
+            GUILayout.EndHorizontal();
+            GUILayout.Space(12);
+            GUILayout.BeginHorizontal();
+                GUILayout.Box(creditsTexture, btnStyle);
+                if (selectedStartMenuIndex == 1) {
+                    GUILayoutDrawSelector();
+                }
+            GUILayout.EndHorizontal();
+            GUILayout.Space(12);
+            GUILayout.BeginHorizontal();
+                GUILayout.Box(quitTexture, btnStyle);
+                if (selectedStartMenuIndex == 2) {
+                    GUILayoutDrawSelector();
+                }
+            GUILayout.EndHorizontal();
+        GUILayout.EndVertical();
+        GUILayout.EndArea();
     }
 
     void OnGUIWaitingForPlayers() {

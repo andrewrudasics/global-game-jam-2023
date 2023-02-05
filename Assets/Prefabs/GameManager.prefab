@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4091370335201894094}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2, y: 0, z: 0}
+  m_LocalPosition: {x: 0.2, y: 0, z: -2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -79,7 +79,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede1ce6d3fcbc2746b2aef118bd259ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  matchStatus: 0
+  SplashScreenCamera: {fileID: 0}
+  GameCamera: {fileID: 0}
+  LevelObject: {fileID: 0}
+  HealthSystem: {fileID: 0}
+  WinningPlayer: -1
 --- !u!114 &4091370335329157381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,7 +218,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4091370336769022237}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2, y: 0, z: 0}
+  m_LocalPosition: {x: 0.16, y: 0, z: 2.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
